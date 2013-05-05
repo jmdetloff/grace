@@ -17,7 +17,7 @@ typedef enum {
 
 @class OrbitalCoordinate;
 
-@interface OrbitalSurface : NSObject <NSCopying>
+@interface OrbitalSurface : NSObject
 
 @property (nonatomic, assign) BOOL activated;
 @property (nonatomic, assign) BOOL isSensor;

@@ -70,27 +70,4 @@
     _lastContactDirection = SurfaceUntouched;
 }
 
-
-#pragma mark -
-
-
-- (id)copyWithZone:(NSZone *)zone {
-    OrbitalSurface *surface = [[OrbitalSurface allocWithZone:zone] initWithCoordA:_coordA coordB:_coordB];
-    return surface;
-}
-
-
-- (BOOL)isEqual:(id)object {
-    if ([object isKindOfClass:[OrbitalSurface class]]) {
-        OrbitalSurface *surface = object;
-        return surface.coordA == _coordA && surface.coordB == _coordB;
-    }
-    return NO;
-}
-
-
-- (NSUInteger)hash {
-    return [_coordA height] + [_coordA angle]*10 + [_coordB height]*100 + [_coordB angle]*1000;
-}
-
 @end
