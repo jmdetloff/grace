@@ -10,7 +10,7 @@
 		0F37B42216D5FDDB000653B1 /* worldBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F37B41F16D5FDDB000653B1 /* worldBack.png */; };
 		0F37B42316D5FDDB000653B1 /* worldFront2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F37B42016D5FDDB000653B1 /* worldFront2.png */; };
 		0F37B42416D5FDDB000653B1 /* worldFront.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F37B42116D5FDDB000653B1 /* worldFront.png */; };
-		0F37B47B16D606F3000653B1 /* RadialObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37B47A16D606F2000653B1 /* RadialObjectStore.m */; };
+		0F37B47B16D606F3000653B1 /* WorldDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F37B47A16D606F2000653B1 /* WorldDataStore.m */; };
 		0F37B48816D60B12000653B1 /* sg1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F37B47E16D60B12000653B1 /* sg1.png */; };
 		0F37B48916D60B12000653B1 /* sg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F37B47F16D60B12000653B1 /* sg2.png */; };
 		0F37B48A16D60B12000653B1 /* sg3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F37B48016D60B12000653B1 /* sg3.png */; };
@@ -414,8 +414,8 @@
 		0F37B41F16D5FDDB000653B1 /* worldBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldBack.png; sourceTree = "<group>"; };
 		0F37B42016D5FDDB000653B1 /* worldFront2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldFront2.png; sourceTree = "<group>"; };
 		0F37B42116D5FDDB000653B1 /* worldFront.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldFront.png; sourceTree = "<group>"; };
-		0F37B47916D606F2000653B1 /* RadialObjectStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadialObjectStore.h; sourceTree = "<group>"; };
-		0F37B47A16D606F2000653B1 /* RadialObjectStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadialObjectStore.m; sourceTree = "<group>"; };
+		0F37B47916D606F2000653B1 /* WorldDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldDataStore.h; sourceTree = "<group>"; };
+		0F37B47A16D606F2000653B1 /* WorldDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldDataStore.m; sourceTree = "<group>"; };
 		0F37B47E16D60B12000653B1 /* sg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sg1.png; sourceTree = "<group>"; };
 		0F37B47F16D60B12000653B1 /* sg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sg2.png; sourceTree = "<group>"; };
 		0F37B48016D60B12000653B1 /* sg3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sg3.png; sourceTree = "<group>"; };
@@ -969,8 +969,8 @@
 				0F770E5016BBC14400D64191 /* AppDelegate.h */,
 				0F770E5116BBC14400D64191 /* AppDelegate.m */,
 				0F770E2F16BBC12900D64191 /* GraceWorld.xcdatamodeld */,
-				0F37B47916D606F2000653B1 /* RadialObjectStore.h */,
-				0F37B47A16D606F2000653B1 /* RadialObjectStore.m */,
+				0F37B47916D606F2000653B1 /* WorldDataStore.h */,
+				0F37B47A16D606F2000653B1 /* WorldDataStore.m */,
 				0F37B53516D625F8000653B1 /* NPCCreator.h */,
 				0F37B53616D625FD000653B1 /* NPCCreator.m */,
 				0F770E1E16BBC12900D64191 /* Supporting Files */,
@@ -1852,7 +1852,7 @@
 				0F770F3016BBC1FF00D64191 /* b2WeldJoint.cpp in Sources */,
 				0F770F3216BBC1FF00D64191 /* b2WheelJoint.cpp in Sources */,
 				0F770F3416BBC1FF00D64191 /* b2Rope.cpp in Sources */,
-				0F37B47B16D606F3000653B1 /* RadialObjectStore.m in Sources */,
+				0F37B47B16D606F3000653B1 /* WorldDataStore.m in Sources */,
 				0F37B53716D6260A000653B1 /* NPCCreator.m in Sources */,
 				0F4340EE17057D6F00FA9D4F /* DiagonalView.m in Sources */,
 				0F6FEE1B1724DED900E31884 /* UIView+b2BodyBackedView.m in Sources */,

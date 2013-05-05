@@ -12,7 +12,7 @@
 #import "RunJumpCrawlEventView.h"
 #import "WorldPhysicsController.h"
 #import "BoyView.h"
-#import "RadialObjectStore.h"
+#import "WorldDataStore.h"
 #import "DiagonalView.h"
 #import "UIView+b2BodyBackedView.h"
 #import "OrbitalCoordinate.h"
@@ -35,7 +35,7 @@
     
     RunJumpCrawlEventView *_runJumpCrawlEventView;
     WorldPhysicsController *_physicsController;
-    RadialObjectStore *_radialObjectStore;
+    WorldDataStore *_worldDataStore;
     BoyView *_boy;
     UIView *_boyContainer;
     NSTimer *_gameLoop;
@@ -74,7 +74,7 @@
     [_worldLayers addObject:worldView];
     [_worldLayers addObject:frontWorldView];
     
-    NSArray *props = [RadialObjectStore gamePropRadialObjects];
+    NSArray *props = [WorldDataStore gamePropRadialObjects];
     [frontWorldView addProps:props];
     
     _physicsController = [[WorldPhysicsController alloc] init];
@@ -95,7 +95,7 @@
 
     [_physicsBackedViews addObject:_boyContainer];
     
-    _radialObjectStore = [[RadialObjectStore alloc] init];
+    _worldDataStore = [[WorldDataStore alloc] init];
     [self addTestObjects];
     
     _gameLoop = [NSTimer scheduledTimerWithTimeInterval:1/60.0 target:self selector:@selector(gameTick) userInfo:nil repeats:YES];
@@ -108,13 +108,13 @@
 //    OrbitalSurface *surface = [[OrbitalSurface alloc] initWithCoordA:coordA coordB:coordB];
 //    [_physicsController placeOrbitalSurfaces:@[surface]];
     
-    NSArray *bridgeSurfaces = [_radialObjectStore bridgeOrbitalCoordinates];
+    NSArray *bridgeSurfaces = [_worldDataStore bridgeOrbitalCoordinates];
     [_physicsController placeOrbitalSurfaces:bridgeSurfaces];
     
-    OrbitalStructure *rampToCityInterior = [_radialObjectStore rampToCityInterior];
+    OrbitalStructure *rampToCityInterior = [_worldDataStore rampToCityInterior];
     [_physicsController placeOrbitalStructure:rampToCityInterior];
     
-    OrbitalStructure *cityInterior = [_radialObjectStore cityInterior];
+    OrbitalStructure *cityInterior = [_worldDataStore cityInterior];
     [_physicsController placeOrbitalStructure:cityInterior];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showCityInterior) name:kShowCityInterior object:nil];
@@ -129,7 +129,7 @@
     dispatch_once(&onceToken, ^{
         GraceWorldView *layer = [_worldLayers objectAtIndex:0];
         
-        RadialElement *cityInterior = [_radialObjectStore cityInteriorProp];
+        RadialElement *cityInterior = [_worldDataStore cityInteriorProp];
         cityInterior.display.alpha = 0;
         
         [UIView animateWithDuration:0.8 animations:^{
@@ -182,7 +182,7 @@
     b2Fixture *boyFixture = [_boyContainer physicsFixture];
     b2Body *boyBody = boyFixture->GetBody();
     
-    if (_radialObjectStore.onLadder) {
+    if (_worldDataStore.onLadder) {
         _runJumpCrawlEventView.handleUpAsContinuous = YES;
 
         if (_boy.climbing) {
@@ -294,7 +294,7 @@
     }
     
     if ((movementState & Up) == Up) {
-        if (!_radialObjectStore.onLadder) {
+        if (!_worldDataStore.onLadder) {
             [self jump];
         } else {
             _boy.climbing = YES;

@@ -1,5 +1,5 @@
 //
-//  RadialObjectStore.h
+//  WorldDataStore.h
 //  GraceWorld
 //
 //  Created by John Detloff on 2/20/13.
@@ -18,11 +18,12 @@ extern NSString *const kShowCityInterior;
 
 @class OrbitalStructure;
 
-@interface RadialObjectStore : NSObject
+@interface WorldDataStore : NSObject
 
 @property (nonatomic, assign) BOOL onLadder;
 
 + (NSArray *)gamePropRadialObjects;
+- (void)loadLevelData;
 - (NSArray *)bridgeOrbitalCoordinates;
 - (OrbitalStructure *)rampToCityInterior;
 - (OrbitalStructure *)cityInterior;

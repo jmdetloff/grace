@@ -1,5 +1,5 @@
 //
-//  RadialObjectStore.m
+//  WorldDataStore.m
 //  GraceWorld
 //
 //  Created by John Detloff on 2/20/13.
@@ -7,19 +7,22 @@
 //
 
 #import "NPCCreator.h"
-#import "RadialObjectStore.h"
+#import "WorldDataStore.h"
 #import "WorldPhysicsController.h"
 #import "OrbitalCoordinate.h"
 #import "OrbitalSurface.h"
 #import "OrbitalStructure.h"
 #import "OrbitalRect.h"
+#import "NSString+SBJSON.h"
 
 NSString *const kShowCityInterior = @"kShowCityInterior";
 
 @implementation RadialElement
 @end
 
-@implementation RadialObjectStore {
+@implementation WorldDataStore {
+    NSArray *_structuresDicts;
+    
     OrbitalStructure *_bridgeStructure;
     OrbitalStructure *_rampToCityInterior;
     OrbitalStructure *_cityInterior;
@@ -28,6 +31,16 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
     
     BOOL _cityLadderEnabled;
     int _onCityLadder;
+}
+
+
+- (void)loadLevelData {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"levelData" ofType:@".json"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSDictionary *jsonDict = [json JSONValue];
+    
+    _structuresDicts = jsonDict[@"structures"];
 }
 
 
@@ -135,7 +148,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
                         [[OrbitalCoordinate alloc] initWithHeight:102 angle:-2.39],
                         [[OrbitalCoordinate alloc] initWithHeight:99.6 angle:-2.47],
                        ];
-    NSArray *surfaces = [RadialObjectStore orbitalSurfacesWithChainCoordinates:coords];
+    NSArray *surfaces = [WorldDataStore orbitalSurfacesWithChainCoordinates:coords];
     return surfaces;
 }
 
@@ -167,7 +180,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
                                        [[OrbitalCoordinate alloc] initWithHeight:130.4 angle:3.10]
                                        ];
         
-        NSArray *groundSurfaces = [RadialObjectStore orbitalSurfacesWithChainCoordinates:groundCoordinates];
+        NSArray *groundSurfaces = [WorldDataStore orbitalSurfacesWithChainCoordinates:groundCoordinates];
         for (OrbitalSurface *surface in groundSurfaces) {
             surface.allowsCollision = NO;
         }
@@ -183,7 +196,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
                                           [[OrbitalCoordinate alloc] initWithHeight:124 angle:3.44],
                                           [[OrbitalCoordinate alloc] initWithHeight:119.4 angle:3.44]
                                           ];
-        NSArray *platform1 = [RadialObjectStore orbitalSurfacesWithChainCoordinates:platformCoordinates1];
+        NSArray *platform1 = [WorldDataStore orbitalSurfacesWithChainCoordinates:platformCoordinates1];
         
         NSArray *platformCoordinates2 = @[
                                           [[OrbitalCoordinate alloc] initWithHeight:139.2 angle:3.46],
@@ -194,7 +207,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
                                           [[OrbitalCoordinate alloc] initWithHeight:152.8 angle:3.45],
                                           [[OrbitalCoordinate alloc] initWithHeight:139.2 angle:3.46]
                                           ];
-        NSArray *platform2 = [RadialObjectStore orbitalSurfacesWithChainCoordinates:platformCoordinates2];
+        NSArray *platform2 = [WorldDataStore orbitalSurfacesWithChainCoordinates:platformCoordinates2];
         
         NSArray *platformCoordinates3 = @[
                                           [[OrbitalCoordinate alloc] initWithHeight:121.3 angle:3.1],
@@ -203,7 +216,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
                                           [[OrbitalCoordinate alloc] initWithHeight:123.8 angle:3.11],
                                           [[OrbitalCoordinate alloc] initWithHeight:121.3 angle:3.1]
                                           ];
-        NSArray *platform3 = [RadialObjectStore orbitalSurfacesWithChainCoordinates:platformCoordinates3];
+        NSArray *platform3 = [WorldDataStore orbitalSurfacesWithChainCoordinates:platformCoordinates3];
         
         NSArray *platformCoordinates4 = @[
                                           [[OrbitalCoordinate alloc] initWithHeight:138.6 angle:3.25],
@@ -212,7 +225,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
                                           [[OrbitalCoordinate alloc] initWithHeight:140.9 angle:3.25],
                                           [[OrbitalCoordinate alloc] initWithHeight:138.6 angle:3.25]
                                           ];
-        NSArray *platform4 = [RadialObjectStore orbitalSurfacesWithChainCoordinates:platformCoordinates4];
+        NSArray *platform4 = [WorldDataStore orbitalSurfacesWithChainCoordinates:platformCoordinates4];
         
         NSArray *platformCoordinates5 = @[
                                           [[OrbitalCoordinate alloc] initWithHeight:156.1 angle:3.3],
@@ -221,7 +234,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
                                           [[OrbitalCoordinate alloc] initWithHeight:156.1 angle:3.25],
                                           [[OrbitalCoordinate alloc] initWithHeight:156.1 angle:3.3]
                                           ];
-        NSArray *platform5 = [RadialObjectStore orbitalSurfacesWithChainCoordinates:platformCoordinates5];
+        NSArray *platform5 = [WorldDataStore orbitalSurfacesWithChainCoordinates:platformCoordinates5];
         
         NSArray *platformCoordinates6 = @[
                                           [[OrbitalCoordinate alloc] initWithHeight:154.7 angle:3.1],
@@ -230,7 +243,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
                                           [[OrbitalCoordinate alloc] initWithHeight:155 angle:3.17],
                                           [[OrbitalCoordinate alloc] initWithHeight:154.7 angle:3.1]
                                           ];
-        NSArray *platform6 = [RadialObjectStore orbitalSurfacesWithChainCoordinates:platformCoordinates6];
+        NSArray *platform6 = [WorldDataStore orbitalSurfacesWithChainCoordinates:platformCoordinates6];
         
         NSArray *platformCoordinates7 = @[
                                           [[OrbitalCoordinate alloc] initWithHeight:172.2 angle:3.44],
@@ -239,7 +252,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
                                           [[OrbitalCoordinate alloc] initWithHeight:172 angle:3.42],
                                           [[OrbitalCoordinate alloc] initWithHeight:172.2 angle:3.44]
                                           ];
-        NSArray *platform7 = [RadialObjectStore orbitalSurfacesWithChainCoordinates:platformCoordinates7];
+        NSArray *platform7 = [WorldDataStore orbitalSurfacesWithChainCoordinates:platformCoordinates7];
         
         NSArray *platformCoordinates8 = @[
                                           [[OrbitalCoordinate alloc] initWithHeight:179.5 angle:3.44],
@@ -248,7 +261,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
                                           [[OrbitalCoordinate alloc] initWithHeight:189.1 angle:3.44],
                                           [[OrbitalCoordinate alloc] initWithHeight:179.5 angle:3.44]
                                           ];
-        NSArray *platform8 = [RadialObjectStore orbitalSurfacesWithChainCoordinates:platformCoordinates8];
+        NSArray *platform8 = [WorldDataStore orbitalSurfacesWithChainCoordinates:platformCoordinates8];
 
         NSArray *platformCoordinates9 = @[
                                           [[OrbitalCoordinate alloc] initWithHeight:163.7 angle:3.39],
@@ -257,7 +270,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
                                           [[OrbitalCoordinate alloc] initWithHeight:188.5 angle:3.39],
                                           [[OrbitalCoordinate alloc] initWithHeight:163.7 angle:3.39]
                                           ];
-        NSArray *platform9 = [RadialObjectStore orbitalSurfacesWithChainCoordinates:platformCoordinates9];
+        NSArray *platform9 = [WorldDataStore orbitalSurfacesWithChainCoordinates:platformCoordinates9];
         
         void (^enterCity)() = ^{
             for (OrbitalSurface *surface in groundSurfaces) {
@@ -383,7 +396,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
                             [[OrbitalCoordinate alloc] initWithHeight:111 angle:3.645],
                             [[OrbitalCoordinate alloc] initWithHeight:112.8 angle:3.53]
                             ];
-        NSMutableArray *surfaces = [RadialObjectStore orbitalSurfacesWithChainCoordinates:coords];
+        NSMutableArray *surfaces = [WorldDataStore orbitalSurfacesWithChainCoordinates:coords];
         
         OrbitalSurface *rampTop = surfaces[1];
         rampTop.collideFromBelow = NO;

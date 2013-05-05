@@ -7,7 +7,7 @@
 //
 
 #import "GraceWorldView.h"
-#import "RadialObjectStore.h"
+#import "WorldDataStore.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kSurfaceHeight 265
