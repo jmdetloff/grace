@@ -13,6 +13,7 @@
 
 @interface OrbitalStructure : NSObject
 
+@property (nonatomic, assign) BOOL activated;
 @property (nonatomic, strong, readonly) NSArray *orbitalSurfaces;
 @property (nonatomic, strong, readonly) NSArray *sensorSurfaces;
 @property (nonatomic, strong, readonly) NSArray *orbitalRects;

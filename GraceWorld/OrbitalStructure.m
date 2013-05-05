@@ -28,6 +28,7 @@
 - (id)init {
     self = [super init];
     if (self) {
+        _activated = YES;
         _crossBlocks = [[NSMutableDictionary alloc] init];
         _rectContactBlocks = [[NSMutableDictionary alloc] init];
         _orbitalSurfaces = [[NSMutableArray alloc] init];
@@ -38,9 +39,23 @@
 }
 
 
+#pragma mark -
+
+
+- (void)setActivated:(BOOL)activated {
+    if (_activated != activated) {
+        _activated = activated;
+        for (OrbitalSurface *surface in _orbitalSurfaces) {
+            surface.activated = _activated;
+        }
+    }
+}
+
+
 - (void)addOrbitalSurfaces:(NSArray *)orbitalSurfaces {
     for (OrbitalSurface *surface in orbitalSurfaces) {
         surface.delegate = self;
+        surface.activated = _activated;
         [_orbitalSurfaces addObject:surface];
     }
 }
