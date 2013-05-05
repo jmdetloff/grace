@@ -237,6 +237,7 @@
 		0F7C4B6B172C475E00037EAC /* OrbitalSurface.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C4B69172C475E00037EAC /* OrbitalSurface.m */; };
 		0F7C4B6F172C62B000037EAC /* OneWayEdgeCollisionDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C4B6D172C62B000037EAC /* OneWayEdgeCollisionDetector.cpp */; };
 		0F7C4B70172C62B000037EAC /* OneWayEdgeCollisionDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C4B6D172C62B000037EAC /* OneWayEdgeCollisionDetector.cpp */; };
+		0FBAB2171735C548007785BF /* CoordinateReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBAB2161735C548007785BF /* CoordinateReporter.m */; };
 		0FBAB21A1735D404007785BF /* levelData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FBAB2191735D404007785BF /* levelData.json */; };
 		0FBAB21B1735D404007785BF /* levelData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FBAB2191735D404007785BF /* levelData.json */; };
 		0FBAB2411735D485007785BF /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBAB2361735D485007785BF /* NSObject+SBJSON.m */; };
@@ -647,6 +648,8 @@
 		0F7C4B69172C475E00037EAC /* OrbitalSurface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrbitalSurface.m; sourceTree = "<group>"; };
 		0F7C4B6D172C62B000037EAC /* OneWayEdgeCollisionDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OneWayEdgeCollisionDetector.cpp; sourceTree = "<group>"; };
 		0F7C4B6E172C62B000037EAC /* OneWayEdgeCollisionDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneWayEdgeCollisionDetector.h; sourceTree = "<group>"; };
+		0FBAB2151735C548007785BF /* CoordinateReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoordinateReporter.h; sourceTree = "<group>"; };
+		0FBAB2161735C548007785BF /* CoordinateReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoordinateReporter.m; sourceTree = "<group>"; };
 		0FBAB2191735D404007785BF /* levelData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = levelData.json; sourceTree = "<group>"; };
 		0FBAB2341735D485007785BF /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		0FBAB2351735D485007785BF /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
@@ -974,6 +977,8 @@
 				0F37B53516D625F8000653B1 /* NPCCreator.h */,
 				0F37B53616D625FD000653B1 /* NPCCreator.m */,
 				0F770E1E16BBC12900D64191 /* Supporting Files */,
+				0FBAB2151735C548007785BF /* CoordinateReporter.h */,
+				0FBAB2161735C548007785BF /* CoordinateReporter.m */,
 				0FBAB2331735D485007785BF /* JSON */,
 			);
 			path = GraceWorld;
@@ -1864,6 +1869,7 @@
 				0F4CE35E1730D1BA00637555 /* OrbitController.m in Sources */,
 				0F4CE3611730FF1D00637555 /* PolygonView.m in Sources */,
 				0FCD44421733815800F7BED4 /* PlayerPhysicsWrapper.m in Sources */,
+				0FBAB2171735C548007785BF /* CoordinateReporter.m in Sources */,
 				0FBAB2411735D485007785BF /* NSObject+SBJSON.m in Sources */,
 				0FBAB2431735D485007785BF /* NSString+SBJSON.m in Sources */,
 				0FBAB2451735D485007785BF /* SBJSON.m in Sources */,

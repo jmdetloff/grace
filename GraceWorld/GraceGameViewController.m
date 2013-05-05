@@ -17,7 +17,10 @@
 #import "UIView+b2BodyBackedView.h"
 #import "OrbitalCoordinate.h"
 #import "OrbitalSurface.h"
+#import "CoordinateReporter.h"
 #import <QuartzCore/QuartzCore.h>
+
+#define kReportingCoordinates NO
 
 #define kWorldSize CGSizeMake(3879*1.2, 2732*1.2)
 #define kLandscapeSize CGSizeMake(1024, 768)
@@ -26,7 +29,7 @@
 #define kOrbitDistanceInPixels 1161.f
 #define kOrbitToPixelsRatio (100/kOrbitDistanceInPixels)
 
-@interface GraceGameViewController () <RunJumpCrawlDelegate, WorldPhysicsDelegate>
+@interface GraceGameViewController () <RunJumpCrawlDelegate, WorldPhysicsDelegate, CoordinateReporterDelegate>
 @end
 
 
@@ -96,18 +99,31 @@
     [_physicsBackedViews addObject:_boyContainer];
     
     _worldDataStore = [[WorldDataStore alloc] init];
+    [_worldDataStore loadLevelData];
     [self addTestObjects];
     
     _gameLoop = [NSTimer scheduledTimerWithTimeInterval:1/60.0 target:self selector:@selector(gameTick) userInfo:nil repeats:YES];
+    
+    if (kReportingCoordinates) {
+        CoordinateReporter *reporter = [[CoordinateReporter alloc] initWithFrame:self.view.bounds];
+        reporter.delegate = self;
+        [_runJumpCrawlEventView addSubview:reporter];
+        
+        UIButton *clearButton = [[UIButton alloc] initWithFrame:CGRectMake(950, 40, 50, 50)];
+        clearButton.backgroundColor = [UIColor blueColor];
+        [clearButton addTarget:reporter action:@selector(clear) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:clearButton];
+        
+        UIButton *printButton = [[UIButton alloc] initWithFrame:CGRectMake(850, 40, 50, 50)];
+        printButton.backgroundColor = [UIColor redColor];
+        [printButton addTarget:reporter action:@selector(print) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:printButton];
+    }
+    
 }
 
 
 - (void)addTestObjects {
-//    OrbitalCoordinate *coordA = [[OrbitalCoordinate alloc] initWithHeight:105 angle:1.46];
-//    OrbitalCoordinate *coordB = [[OrbitalCoordinate alloc] initWithHeight:93 angle:1.46];
-//    OrbitalSurface *surface = [[OrbitalSurface alloc] initWithCoordA:coordA coordB:coordB];
-//    [_physicsController placeOrbitalSurfaces:@[surface]];
-    
     NSArray *bridgeSurfaces = [_worldDataStore bridgeOrbitalCoordinates];
     [_physicsController placeOrbitalSurfaces:bridgeSurfaces];
     
@@ -232,27 +248,6 @@
 }
 
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    GraceWorldView *layer = [_worldLayers objectAtIndex:0];
-    
-    UITouch *touch = [touches anyObject];
-    CGPoint touchPoint = [touch locationInView:self.view];
-
-    CGPoint center = [layer worldCenter];
-    center = [self.view convertPoint:center fromView:layer];
-    
-    CGFloat convertedX = center.x - (1024/2 - touchPoint.x);
-    CGFloat angle = [layer angle];
-    CGFloat touchAngle = - atan2(touchPoint.y - center.y, center.x - convertedX) - M_PI/2;
-    
-    CGFloat dx = (touchPoint.x - center.x) * kOrbitToPixelsRatio;
-    CGFloat dy = -(touchPoint.y - center.y) * kOrbitToPixelsRatio;
-    CGFloat height = sqrtf(dx*dx + dy*dy);
-    
-    NSLog(@"*** touch at angle %f height %f ***", angle - touchAngle, height);
-}
-
-
 #pragma mark - Physics Delegate 
 
 
@@ -310,6 +305,25 @@
         b2Vec2 velocity(boyPhysics->GetLinearVelocity().x, 12);
         boyPhysics->SetLinearVelocity(velocity);
     }
-} 
+}
+
+
+- (NSDictionary *)attributesToReportForCoordinate:(CGPoint)coordinate {
+    GraceWorldView *layer = [_worldLayers objectAtIndex:0];
+    CGPoint center = [layer worldCenter];
+    center = [self.view convertPoint:center fromView:layer];
+    
+    CGFloat convertedX = center.x - (1024/2 - coordinate.x);
+    CGFloat angle = [layer angle];
+    CGFloat touchAngle = - atan2(coordinate.y - center.y, center.x - convertedX) - M_PI/2;
+    
+    CGFloat dx = (coordinate.x - center.x) * kOrbitToPixelsRatio;
+    CGFloat dy = -(coordinate.y - center.y) * kOrbitToPixelsRatio;
+    CGFloat height = sqrtf(dx*dx + dy*dy);
+    
+    NSNumber *angleNum = [NSNumber numberWithFloat:angle-touchAngle];
+    NSNumber *heightNum = [NSNumber numberWithFloat:height];
+    return @{@"height":heightNum,@"angle":angleNum};
+}
 
 @end
