@@ -8,7 +8,7 @@
 
 #import "PlayerPhysicsWrapper.h"
 #import "GraceGameViewController.h"
-#import "GraceWorldView.h"
+#import "RotatingBackgroundView.h"
 #import "RunJumpCrawlEventView.h"
 #import "WorldPhysicsController.h"
 #import "BoyView.h"
@@ -66,11 +66,11 @@
     _physicsBackedViews = [[NSMutableArray alloc] init];
     _worldLayers = [[NSMutableArray alloc] init];
     
-    GraceWorldView *worldView = [[GraceWorldView alloc] initWithFrame:CGRectMake(roundf((kLandscapeSize.width - kWorldSize.width)/2) + kWorldOffsetFromCenter.horizontal, kWorldOffsetFromCenter.vertical, kWorldSize.width, kWorldSize.height)];
+    RotatingBackgroundView *worldView = [[RotatingBackgroundView alloc] initWithFrame:CGRectMake(roundf((kLandscapeSize.width - kWorldSize.width)/2) + kWorldOffsetFromCenter.horizontal, kWorldOffsetFromCenter.vertical, kWorldSize.width, kWorldSize.height)];
     [worldView addWorldLayer:[UIImage imageNamed:@"worldBack.png"]];
     [_displayView addSubview:worldView];
     
-    GraceWorldView *frontWorldView = [[GraceWorldView alloc] initWithFrame:CGRectMake(roundf((kLandscapeSize.width - kWorldSize.width)/2) + kWorldOffsetFromCenter.horizontal, kWorldOffsetFromCenter.vertical, kWorldSize.width, kWorldSize.height)];
+    RotatingBackgroundView *frontWorldView = [[RotatingBackgroundView alloc] initWithFrame:CGRectMake(roundf((kLandscapeSize.width - kWorldSize.width)/2) + kWorldOffsetFromCenter.horizontal, kWorldOffsetFromCenter.vertical, kWorldSize.width, kWorldSize.height)];
     [frontWorldView addWorldLayer:[UIImage imageNamed:@"worldFront.png"]];
     [_displayView addSubview:frontWorldView];
     
@@ -143,7 +143,7 @@
 - (void)showCityInterior {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        GraceWorldView *layer = [_worldLayers objectAtIndex:0];
+        RotatingBackgroundView *layer = [_worldLayers objectAtIndex:0];
         
         RadialElement *cityInterior = [_worldDataStore cityInteriorProp];
         cityInterior.display.alpha = 0;
@@ -174,7 +174,7 @@
     _physicsController.orbitSpeed = orbitRadians;
     
     CGFloat radians = [_physicsController updatePhysics:0.05];
-    for (GraceWorldView *worldView in _worldLayers) {
+    for (RotatingBackgroundView *worldView in _worldLayers) {
         [worldView shiftBy:-radians];
     }
     
@@ -266,7 +266,7 @@
     point.x /= kOrbitToPixelsRatio;
     point.y /= kOrbitToPixelsRatio;
     
-    GraceWorldView *backWorldView = [_worldLayers objectAtIndex:0];
+    RotatingBackgroundView *backWorldView = [_worldLayers objectAtIndex:0];
     
     CGPoint convertedPosition = [backWorldView worldCenter];
     convertedPosition = [_displayView convertPoint:convertedPosition fromView:backWorldView];
@@ -309,7 +309,7 @@
 
 
 - (NSDictionary *)attributesToReportForCoordinate:(CGPoint)coordinate {
-    GraceWorldView *layer = [_worldLayers objectAtIndex:0];
+    RotatingBackgroundView *layer = [_worldLayers objectAtIndex:0];
     CGPoint center = [layer worldCenter];
     center = [self.view convertPoint:center fromView:layer];
     

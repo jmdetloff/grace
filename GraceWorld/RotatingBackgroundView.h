@@ -1,5 +1,5 @@
 //
-//  GraceWorldView.h
+//  RotatingBackgroundView.h
 //  Grace World
 //
 //  Created by John Detloff on 1/28/13.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GraceWorldView : UIView
+@interface RotatingBackgroundView : UIView
 
 @property (nonatomic, assign,readonly) CGFloat angle;
 

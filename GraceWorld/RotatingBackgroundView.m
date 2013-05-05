@@ -1,19 +1,19 @@
 //
-//  GraceWorldView.m
+//  RotatingBackgroundView.m
 //  Grace World
 //
 //  Created by John Detloff on 1/28/13.
 //  Copyright (c) 2013 Uebie. All rights reserved.
 //
 
-#import "GraceWorldView.h"
+#import "RotatingBackgroundView.h"
 #import "WorldDataStore.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kSurfaceHeight 265
 #define kDistanceToCenterFromSurface 1161
 
-@implementation GraceWorldView {
+@implementation RotatingBackgroundView {
     NSMutableArray *_layers;
     CGFloat _radianRotation;
 }
@@ -33,7 +33,6 @@
 
 - (void)shiftBy:(CGFloat)distance {
     self.transform = CGAffineTransformRotate(self.transform, distance);
-//    NSLog(@"%f" ,atan2(self.transform.b, self.transform.a) + M_PI/2);
 }
 
 

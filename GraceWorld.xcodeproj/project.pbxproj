@@ -131,8 +131,8 @@
 		0F770E6016BBC15C00D64191 /* RunJumpCrawlEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F770E5C16BBC15C00D64191 /* RunJumpCrawlEventView.m */; };
 		0F770E6616BBC17600D64191 /* BoyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F770E6316BBC17600D64191 /* BoyView.m */; };
 		0F770E6716BBC17600D64191 /* BoyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F770E6316BBC17600D64191 /* BoyView.m */; };
-		0F770E6816BBC17600D64191 /* GraceWorldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F770E6516BBC17600D64191 /* GraceWorldView.m */; };
-		0F770E6916BBC17600D64191 /* GraceWorldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F770E6516BBC17600D64191 /* GraceWorldView.m */; };
+		0F770E6816BBC17600D64191 /* RotatingBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F770E6516BBC17600D64191 /* RotatingBackgroundView.m */; };
+		0F770E6916BBC17600D64191 /* RotatingBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F770E6516BBC17600D64191 /* RotatingBackgroundView.m */; };
 		0F770E6D16BBC18900D64191 /* GraceGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F770E6C16BBC18900D64191 /* GraceGameViewController.m */; };
 		0F770E6E16BBC18900D64191 /* GraceGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F770E6C16BBC18900D64191 /* GraceGameViewController.m */; };
 		0F770ED616BBC1FF00D64191 /* Box2DConfig.cmake in Resources */ = {isa = PBXBuildFile; fileRef = 0F770E7116BBC1FF00D64191 /* Box2DConfig.cmake */; };
@@ -543,8 +543,8 @@
 		0F770E5C16BBC15C00D64191 /* RunJumpCrawlEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunJumpCrawlEventView.m; sourceTree = "<group>"; };
 		0F770E6216BBC17600D64191 /* BoyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoyView.h; sourceTree = "<group>"; };
 		0F770E6316BBC17600D64191 /* BoyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoyView.m; sourceTree = "<group>"; };
-		0F770E6416BBC17600D64191 /* GraceWorldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraceWorldView.h; sourceTree = "<group>"; };
-		0F770E6516BBC17600D64191 /* GraceWorldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraceWorldView.m; sourceTree = "<group>"; };
+		0F770E6416BBC17600D64191 /* RotatingBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotatingBackgroundView.h; sourceTree = "<group>"; };
+		0F770E6516BBC17600D64191 /* RotatingBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotatingBackgroundView.m; sourceTree = "<group>"; };
 		0F770E6B16BBC18900D64191 /* GraceGameViewController.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = GraceGameViewController.h; sourceTree = "<group>"; };
 		0F770E6C16BBC18900D64191 /* GraceGameViewController.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; path = GraceGameViewController.m; sourceTree = "<group>"; };
 		0F770E7016BBC1FF00D64191 /* Box2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box2D.h; sourceTree = "<group>"; };
@@ -1033,8 +1033,8 @@
 			children = (
 				0F770E6216BBC17600D64191 /* BoyView.h */,
 				0F770E6316BBC17600D64191 /* BoyView.m */,
-				0F770E6416BBC17600D64191 /* GraceWorldView.h */,
-				0F770E6516BBC17600D64191 /* GraceWorldView.m */,
+				0F770E6416BBC17600D64191 /* RotatingBackgroundView.h */,
+				0F770E6516BBC17600D64191 /* RotatingBackgroundView.m */,
 				0F4340EC17057D6F00FA9D4F /* DiagonalView.h */,
 				0F4340ED17057D6F00FA9D4F /* DiagonalView.m */,
 				0F6FEE191724DED900E31884 /* UIView+b2BodyBackedView.h */,
@@ -1809,7 +1809,7 @@
 				0F770E5D16BBC15C00D64191 /* GTMultiSpriteView.m in Sources */,
 				0F770E5F16BBC15C00D64191 /* RunJumpCrawlEventView.m in Sources */,
 				0F770E6616BBC17600D64191 /* BoyView.m in Sources */,
-				0F770E6816BBC17600D64191 /* GraceWorldView.m in Sources */,
+				0F770E6816BBC17600D64191 /* RotatingBackgroundView.m in Sources */,
 				0F770E6D16BBC18900D64191 /* GraceGameViewController.m in Sources */,
 				0F770EDA16BBC1FF00D64191 /* b2BroadPhase.cpp in Sources */,
 				0F770EDC16BBC1FF00D64191 /* b2CollideCircle.cpp in Sources */,
@@ -1889,7 +1889,7 @@
 				0F770E5E16BBC15C00D64191 /* GTMultiSpriteView.m in Sources */,
 				0F770E6016BBC15C00D64191 /* RunJumpCrawlEventView.m in Sources */,
 				0F770E6716BBC17600D64191 /* BoyView.m in Sources */,
-				0F770E6916BBC17600D64191 /* GraceWorldView.m in Sources */,
+				0F770E6916BBC17600D64191 /* RotatingBackgroundView.m in Sources */,
 				0F770E6E16BBC18900D64191 /* GraceGameViewController.m in Sources */,
 				0F770EDB16BBC1FF00D64191 /* b2BroadPhase.cpp in Sources */,
 				0F770EDD16BBC1FF00D64191 /* b2CollideCircle.cpp in Sources */,
