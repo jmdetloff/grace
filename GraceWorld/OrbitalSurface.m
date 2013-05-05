@@ -20,14 +20,19 @@
         _coordA = coordA;
         _coordB = coordB;
         _lastContactDirection = SurfaceUntouched;
-        _allowsCollision = YES;
         _collideFromBelow = YES;
+        _activated = YES;
     }
     return self;
 }
 
 
 #pragma mark -
+
+
+- (BOOL)allowsCollision {
+    return _activated && !_isSensor;
+}
 
 
 - (void)updatePhysics {

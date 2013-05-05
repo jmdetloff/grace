@@ -166,7 +166,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
         OrbitalCoordinate *entranceSensorCoordA = [[OrbitalCoordinate alloc] initWithHeight:122 angle:3.54];
         OrbitalCoordinate *entranceSensorCoordB = [[OrbitalCoordinate alloc] initWithHeight:112 angle:3.54];
         OrbitalSurface *entranceSensor = [[OrbitalSurface alloc] initWithCoordA:entranceSensorCoordA coordB:entranceSensorCoordB];
-        entranceSensor.allowsCollision = NO;
+        entranceSensor.isSensor = YES;
         
         NSArray *groundCoordinates = @[
                                        [[OrbitalCoordinate alloc] initWithHeight:112.5 angle:3.53],
@@ -182,7 +182,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
         
         NSArray *groundSurfaces = [WorldDataStore orbitalSurfacesWithChainCoordinates:groundCoordinates];
         for (OrbitalSurface *surface in groundSurfaces) {
-            surface.allowsCollision = NO;
+            surface.activated = NO;
         }
         
         NSArray *platformCoordinates1 = @[
@@ -274,7 +274,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
         
         void (^enterCity)() = ^{
             for (OrbitalSurface *surface in groundSurfaces) {
-                surface.allowsCollision = YES;
+                surface.activated = YES;
             }
             _cityLadderEnabled = YES;
             [[NSNotificationCenter defaultCenter] postNotificationName:kShowCityInterior object:nil];

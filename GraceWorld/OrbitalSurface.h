@@ -24,10 +24,13 @@ typedef enum {
 
 @interface OrbitalSurface : NSObject <NSCopying>
 
+@property (nonatomic, assign) BOOL activated;
+@property (nonatomic, assign) BOOL isSensor;
+@property (nonatomic, assign, readonly) BOOL allowsCollision;
+
 @property (nonatomic, assign) BOOL moving;
 @property (nonatomic, assign) BOOL fallThroughOnTap;
 @property (nonatomic, assign) BOOL collideFromBelow;
-@property (nonatomic, assign) BOOL allowsCollision;
 @property (nonatomic, assign) CGFloat verticalVelocity;
 @property (nonatomic, assign) CGFloat horizontalVelocity;
 @property (nonatomic, strong) OrbitalCoordinate *coordA;
