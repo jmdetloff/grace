@@ -1,4 +1,10 @@
 {
+    "worldDimensions": {
+        "height":3278,
+        "width":4655,
+        "xCenter":2346,
+        "yCenter":1426
+    }
     "structures":[
         {
             "name":"bridge",

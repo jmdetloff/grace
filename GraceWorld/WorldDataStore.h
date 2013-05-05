@@ -24,6 +24,8 @@ extern NSString *const kShowCityInterior;
 
 + (NSArray *)gamePropRadialObjects;
 - (void)loadLevelData;
+- (CGSize)worldSize;
+- (CGPoint)worldRotationalCenter;
 - (NSArray *)bridgeOrbitalCoordinates;
 - (OrbitalStructure *)rampToCityInterior;
 - (OrbitalStructure *)cityInterior;

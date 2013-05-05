@@ -21,7 +21,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
 @end
 
 @implementation WorldDataStore {
-    NSArray *_structuresDicts;
+    NSDictionary *_graceMetaData;
     
     OrbitalStructure *_bridgeStructure;
     OrbitalStructure *_rampToCityInterior;
@@ -40,7 +40,23 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
     NSString *json = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSDictionary *jsonDict = [json JSONValue];
     
-    _structuresDicts = jsonDict[@"structures"];
+    _graceMetaData = jsonDict;
+}
+
+
+- (CGSize)worldSize {
+    NSDictionary *dimensions = _graceMetaData[@"worldDimensions"];
+    CGFloat width = [dimensions[@"width"] floatValue];
+    CGFloat height = [dimensions[@"height"] floatValue];
+    return CGSizeMake(width, height);
+}
+
+
+- (CGPoint)worldRotationalCenter {
+    NSDictionary *dimensions = _graceMetaData[@"worldDimensions"];
+    CGFloat xCenter = [dimensions[@"xCenter"] floatValue];
+    CGFloat yCenter = [dimensions[@"yCenter"] floatValue];
+    return CGPointMake(xCenter, yCenter);
 }
 
 

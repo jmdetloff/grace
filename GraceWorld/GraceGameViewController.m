@@ -22,7 +22,6 @@
 
 #define kReportingCoordinates NO
 
-#define kWorldSize CGSizeMake(3879*1.2, 2732*1.2)
 #define kLandscapeSize CGSizeMake(1024, 768)
 #define kWorldOffsetFromCenter UIOffsetMake(0,50)
 
@@ -54,6 +53,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _worldDataStore = [[WorldDataStore alloc] init];
+    [_worldDataStore loadLevelData];
+    
     _displayView = [[UIView alloc] init];
     _displayView.frame = [self.view bounds];
     _displayView.layer.masksToBounds = NO;
@@ -66,11 +68,13 @@
     _physicsBackedViews = [[NSMutableArray alloc] init];
     _worldLayers = [[NSMutableArray alloc] init];
     
-    RotatingBackgroundView *worldView = [[RotatingBackgroundView alloc] initWithFrame:CGRectMake(roundf((kLandscapeSize.width - kWorldSize.width)/2) + kWorldOffsetFromCenter.horizontal, kWorldOffsetFromCenter.vertical, kWorldSize.width, kWorldSize.height)];
+    CGSize worldSize = [_worldDataStore worldSize];
+    
+    RotatingBackgroundView *worldView = [[RotatingBackgroundView alloc] initWithFrame:CGRectMake(roundf((kLandscapeSize.width - worldSize.width)/2) + kWorldOffsetFromCenter.horizontal, kWorldOffsetFromCenter.vertical, worldSize.width, worldSize.height)];
     [worldView addWorldLayer:[UIImage imageNamed:@"worldBack.png"]];
     [_displayView addSubview:worldView];
     
-    RotatingBackgroundView *frontWorldView = [[RotatingBackgroundView alloc] initWithFrame:CGRectMake(roundf((kLandscapeSize.width - kWorldSize.width)/2) + kWorldOffsetFromCenter.horizontal, kWorldOffsetFromCenter.vertical, kWorldSize.width, kWorldSize.height)];
+    RotatingBackgroundView *frontWorldView = [[RotatingBackgroundView alloc] initWithFrame:CGRectMake(roundf((kLandscapeSize.width - worldSize.width)/2) + kWorldOffsetFromCenter.horizontal, kWorldOffsetFromCenter.vertical, worldSize.width, worldSize.height)];
     [frontWorldView addWorldLayer:[UIImage imageNamed:@"worldFront.png"]];
     [_displayView addSubview:frontWorldView];
     
@@ -98,8 +102,6 @@
 
     [_physicsBackedViews addObject:_boyContainer];
     
-    _worldDataStore = [[WorldDataStore alloc] init];
-    [_worldDataStore loadLevelData];
     [self addTestObjects];
     
     _gameLoop = [NSTimer scheduledTimerWithTimeInterval:1/60.0 target:self selector:@selector(gameTick) userInfo:nil repeats:YES];
@@ -268,7 +270,7 @@
     
     RotatingBackgroundView *backWorldView = [_worldLayers objectAtIndex:0];
     
-    CGPoint convertedPosition = [backWorldView worldCenter];
+    CGPoint convertedPosition = [_worldDataStore worldRotationalCenter];
     convertedPosition = [_displayView convertPoint:convertedPosition fromView:backWorldView];
     convertedPosition.x += point.x;
     convertedPosition.y -= point.y;
@@ -310,7 +312,7 @@
 
 - (NSDictionary *)attributesToReportForCoordinate:(CGPoint)coordinate {
     RotatingBackgroundView *layer = [_worldLayers objectAtIndex:0];
-    CGPoint center = [layer worldCenter];
+    CGPoint center = [_worldDataStore worldRotationalCenter];
     center = [self.view convertPoint:center fromView:layer];
     
     CGFloat convertedX = center.x - (1024/2 - coordinate.x);
