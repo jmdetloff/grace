@@ -153,6 +153,9 @@
     for (OrbitalSurface *surface in orbitalStructure.orbitalSurfaces) {
         [self placeOrbitalSurface:surface];
     }
+    for (OrbitalSurface *sensor in orbitalStructure.sensorSurfaces) {
+        [self placeOrbitalSurface:sensor];
+    }
     for (OrbitalRect *rect in orbitalStructure.orbitalRects) {
         [self placeOrbitalRect:rect];
     }

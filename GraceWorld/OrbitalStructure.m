@@ -19,6 +19,7 @@
     NSMutableDictionary *_crossBlocks;
     NSMutableDictionary *_rectContactBlocks;
     NSMutableArray *_orbitalSurfaces;
+    NSMutableArray *_sensorSurfaces;
     NSMutableArray *_orbitalRects;
 }
 
@@ -31,6 +32,7 @@
         _rectContactBlocks = [[NSMutableDictionary alloc] init];
         _orbitalSurfaces = [[NSMutableArray alloc] init];
         _orbitalRects = [[NSMutableArray alloc] init];
+        _sensorSurfaces = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -38,14 +40,15 @@
 
 - (void)addOrbitalSurfaces:(NSArray *)orbitalSurfaces {
     for (OrbitalSurface *surface in orbitalSurfaces) {
-        [self addOrbitalSurface:surface withCrossBlock:nil];
+        surface.delegate = self;
+        [_orbitalSurfaces addObject:surface];
     }
 }
 
 
 - (void)addOrbitalSurface:(OrbitalSurface *)surface withCrossBlock:(void (^)())crossBlock {
     surface.delegate = self;
-    [_orbitalSurfaces addObject:surface];
+    [_sensorSurfaces addObject:surface];
     
     void (^blockCopy)() = [crossBlock copy];
     if (blockCopy) {

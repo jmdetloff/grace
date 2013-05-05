@@ -14,6 +14,7 @@
 @interface OrbitalStructure : NSObject
 
 @property (nonatomic, strong, readonly) NSArray *orbitalSurfaces;
+@property (nonatomic, strong, readonly) NSArray *sensorSurfaces;
 @property (nonatomic, strong, readonly) NSArray *orbitalRects;
 
 - (void)addOrbitalSurfaces:(NSArray *)orbitalSurfaces;
