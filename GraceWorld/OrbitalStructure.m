@@ -11,12 +11,11 @@
 #import "OrbitalRect.h"
 
 
-@interface OrbitalStructure () <OrbitalSurfaceSensorDelegate, OrbitalRectSensorDelegate>
+@interface OrbitalStructure () <OrbitalRectSensorDelegate>
 @end
 
 
 @implementation OrbitalStructure {
-    NSMutableDictionary *_crossBlocks;
     NSMutableDictionary *_rectContactBlocks;
     NSMutableArray *_orbitalSurfaces;
     NSMutableArray *_sensorSurfaces;
@@ -29,7 +28,6 @@
     self = [super init];
     if (self) {
         _activated = YES;
-        _crossBlocks = [[NSMutableDictionary alloc] init];
         _rectContactBlocks = [[NSMutableDictionary alloc] init];
         _orbitalSurfaces = [[NSMutableArray alloc] init];
         _orbitalRects = [[NSMutableArray alloc] init];
@@ -54,21 +52,14 @@
 
 - (void)addOrbitalSurfaces:(NSArray *)orbitalSurfaces {
     for (OrbitalSurface *surface in orbitalSurfaces) {
-        surface.delegate = self;
         surface.activated = _activated;
         [_orbitalSurfaces addObject:surface];
     }
 }
 
 
-- (void)addOrbitalSurface:(OrbitalSurface *)surface withCrossBlock:(void (^)())crossBlock {
-    surface.delegate = self;
+- (void)addSensorSurface:(OrbitalSurface *)surface {
     [_sensorSurfaces addObject:surface];
-    
-    void (^blockCopy)() = [crossBlock copy];
-    if (blockCopy) {
-        [_crossBlocks setObject:blockCopy forKey:surface];
-    }
 }
 
 
@@ -84,14 +75,6 @@
 
 
 #pragma mark -
-
-
-- (void)orbitalSurfaceCrossedByBoy:(OrbitalSurface *)surface {
-    void (^surfaceSensorAction)() = [_crossBlocks objectForKey:surface];
-    if (surfaceSensorAction) {
-        surfaceSensorAction();
-    }
-}
 
 
 - (void)orbitalRectContactedByBoy:(OrbitalRect *)rect {

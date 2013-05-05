@@ -53,14 +53,20 @@
 
 
 - (void)boyMadeContactOnSide:(SurfaceRelativeDirection)relativeDirection {
+    if (!_isSensor) return;
+    
     if ((relativeDirection == SurfaceLeft && _lastContactDirection == SurfaceRight) || (relativeDirection == SurfaceRight && _lastContactDirection == SurfaceLeft)) {
-        [self.delegate orbitalSurfaceCrossedByBoy:self];
+        if (_sensorAction) {
+            _sensorAction();
+        }
     }
     
     _lastContactDirection = relativeDirection;
 }
 
 - (void)boyEndedContact {
+    if (!_isSensor) return;
+    
     _lastContactDirection = SurfaceUntouched;
 }
 

@@ -279,6 +279,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
             _cityLadderEnabled = YES;
             [[NSNotificationCenter defaultCenter] postNotificationName:kShowCityInterior object:nil];
         };
+        entranceSensor.sensorAction = [enterCity copy];
         
         void (^ladderBlock)(BOOL contact) = ^(BOOL contact){
             if (!_cityLadderEnabled) {
@@ -354,7 +355,7 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
         OrbitalRect *ladder8 = [[OrbitalRect alloc] initWithVertices:ladder8Vertices];
         
         _cityInterior = [[OrbitalStructure alloc] init];
-        [_cityInterior addOrbitalSurface:entranceSensor withCrossBlock:enterCity];
+        [_cityInterior addSensorSurface:entranceSensor];
         [_cityInterior addOrbitalSurfaces:surfaces];
         [_cityInterior addOrbitalSurfaces:groundSurfaces];
         [_cityInterior addOrbitalSurfaces:platform1];

@@ -9,11 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "Box2D/Box2D.h"
 
-@class OrbitalSurface;
-@protocol OrbitalSurfaceSensorDelegate <NSObject>
-- (void)orbitalSurfaceCrossedByBoy:(OrbitalSurface *)surface;
-@end
-
 typedef enum {
     SurfaceUntouched,
     SurfaceLeft,
@@ -27,6 +22,7 @@ typedef enum {
 @property (nonatomic, assign) BOOL activated;
 @property (nonatomic, assign) BOOL isSensor;
 @property (nonatomic, assign, readonly) BOOL allowsCollision;
+@property (nonatomic, strong) void (^sensorAction)();
 
 @property (nonatomic, assign) BOOL moving;
 @property (nonatomic, assign) BOOL fallThroughOnTap;
@@ -35,7 +31,6 @@ typedef enum {
 @property (nonatomic, assign) CGFloat horizontalVelocity;
 @property (nonatomic, strong) OrbitalCoordinate *coordA;
 @property (nonatomic, strong) OrbitalCoordinate *coordB;
-@property (nonatomic, weak) id<OrbitalSurfaceSensorDelegate> delegate;
 @property (nonatomic, assign) b2Body *physicsBody;
 
 - (id)initWithCoordA:(OrbitalCoordinate *)coordA coordB:(OrbitalCoordinate *)coordB;
