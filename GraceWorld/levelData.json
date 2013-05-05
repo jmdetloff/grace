@@ -1,0 +1,178 @@
+{
+    "structures":[
+        {
+            "name":"bridge",
+            "chains":[
+                {
+                    "name":"bridgeFloor",
+                    "coords":[
+                        {"height":94.5, "angle":-0.556},
+                        {"height":100.4, "angle":-0.733},
+                        {"height":105.7, "angle":-0.88},
+                        {"height":108, "angle":-0.98},
+                        {"height":109.5, "angle":-1.09},
+                        {"height":110, "angle":-1.19},
+                        {"height":110, "angle":-1.29},
+                        {"height":109.5, "angle":-1.39},
+                        {"height":109.5, "angle":-1.49},
+                        {"height":109.5, "angle":-1.59},
+                        {"height":109.5, "angle":-1.69},
+                        {"height":109.5, "angle":-1.79},
+                        {"height":109.5, "angle":-1.89},
+                        {"height":109.5, "angle":-1.99},
+                        {"height":109, "angle":-2.09},
+                        {"height":108, "angle":-2.19},
+                        {"height":105.5, "angle":-2.29},
+                        {"height":102, "angle":-2.39},
+                        {"height":99.6, "angle":-2.47}                
+                    ]
+                }
+            ]
+        },
+        {
+            "name":"cityInterior",
+            "sensors":[
+                {
+                    "name":"cityEntrance",
+                    "coordA":{"height":122,"angle":3.54},
+                    "coordB":{"height":112,"angle":3.54}
+                }
+            ],
+            "chains":[
+                {
+                    "name":"cityInteriorFloor",
+                    "coords":[
+                        {"angle":3.53,"height":112.23, "collison":"none"},
+                        {"angle":3.43,"height":111.81, "collison":"none"},
+                        {"angle":3.42,"height":104.42, "collison":"none"},
+                        {"angle":3.35,"height":104.29, "collison":"none"},
+                        {"angle":3.34,"height":107.19, "collison":"none"},
+                        {"angle":3.26,"height":107.55, "collison":"none"},
+                        {"angle":3.25,"height":112.15, "collison":"none"},
+                        {"angle":3.12,"height":112.41, "collison":"none"},
+                        {"angle":2.96,"height":129.78, "collison":"none"},
+                        {"angle":2.98,"height":100.30, "collison":"none"},
+                        {"angle":2.86,"height":100.46, "collison":"none"},
+                        {"angle":2.76,"height":100.31, "collison":"none"},
+                        {"angle":2.64,"height":99.58, "collison":"none"},
+                        {"angle":2.43,"height":120.85, "collison":"none"}
+                    ]
+                },
+                {
+                    "name":"cityPlatform1",
+                    "coords":[
+                        {"angle":3.44,"height":119.32},
+                        {"angle":3.33,"height":119.66},
+                        {"angle":3.34,"height":124.31},
+                        {"angle":3.32,"height":125.29},
+                        {"angle":3.32,"height":130.83},
+                        {"angle":3.45,"height":130.26},
+                        {"angle":3.45,"height":124.84},
+                        {"angle":3.44,"height":123.97},
+                        {"angle":3.44,"height":119.23}
+                    ]
+                },
+                {
+                    "name":"platform2",
+                    "coords":[
+                        {"angle":3.19,"height":121.51},
+                        {"angle":3.11,"height":121.44},
+                        {"angle":3.11,"height":123.45},
+                        {"angle":3.19,"height":123.97},
+                        {"angle":3.19,"height":121.51}
+                    ]
+                },
+                {
+                    "name":"platform3",
+                    "coords":[
+                        {"angle":3.25,"height":141.31},
+                        {"angle":3.26,"height":138.63},
+                        {"angle":3.17,"height":137.43},
+                        {"angle":3.17,"height":140.15},
+                        {"angle":3.25,"height":141.40}
+                    ]
+                },
+                {
+                    "name":"platform4",
+                    "coords":[
+                        {"angle":3.17,"height":155.34},
+                        {"angle":3.17,"height":153.18},
+                        {"angle":3.10,"height":153.08},
+                        {"angle":3.10,"height":155.10},
+                        {"angle":3.17,"height":155.17}
+                    ]
+                },
+                {
+                    "name":"platform5",
+                    "coords":[
+                        {"angle":3.30,"height":156.19},
+                        {"angle":3.30,"height":151.05},
+                        {"angle":3.26,"height":151.51},
+                        {"angle":3.25,"height":156.67},
+                        {"angle":3.30,"height":156.36}
+                    ]
+                },
+                {
+                    "name":"platform6",
+                    "coords":[
+                        {"angle":3.46,"height":139.32},
+                        {"angle":3.31,"height":139.46},
+                        {"angle":3.31,"height":143.42},
+                        {"angle":3.38,"height":142.60},
+                        {"angle":3.38,"height":153.02},
+                        {"angle":3.45,"height":153.07},
+                        {"angle":3.46,"height":139.31}
+                    ]
+                },
+                {
+                    "name":"platform7",
+                    "coords":[
+                        {"angle":3.42,"height":162.65},
+                        {"angle":3.45,"height":162.66},
+                        {"angle":3.45,"height":172.13},
+                        {"angle":3.42,"height":172.21},
+                        {"angle":3.42,"height":162.74}
+                    ]
+                },
+                {
+                    "name":"platform8",
+                    "coords":[
+                        {"angle":3.42,"height":179.53},
+                        {"angle":3.44,"height":179.44},
+                        {"angle":3.44,"height":189.25},
+                        {"angle":3.42,"height":189.09},
+                        {"angle":3.42,"height":179.53}
+                    ]
+                },
+                {
+                    "name":"platform9",
+                    "coords":[
+                        {"angle":3.39,"height":163.65},
+                        {"angle":3.39,"height":188.29},
+                        {"angle":3.37,"height":188.59},
+                        {"angle":3.37,"height":163.94},
+                        {"angle":3.39,"height":163.65}
+                    ]
+                }
+            ]
+        },
+        {
+            "name":"cityRamnp",
+            "chains":[
+                {
+                    "name":"rampChain",
+                    "coords":[
+                        {"angle":3.68,"height":94.43},
+                        {"angle":3.83,"height":99.39},
+                        {"angle":3.72,"height":100.26},
+                        {"angle":3.69,"height":101.84},
+                        {"angle":3.69,"height":104.97},
+                        {"angle":3.64,"height":105.01},
+                        {"angle":3.64,"height":110.81},
+                        {"angle":3.53,"height":112.52}
+                    ]
+                }
+            ]
+        }
+    ]
+}
