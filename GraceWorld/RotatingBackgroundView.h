@@ -11,12 +11,10 @@
 @interface RotatingBackgroundView : UIView
 
 @property (nonatomic, assign,readonly) CGFloat angle;
+@property (nonatomic, strong, readonly) UIView *rotatingImageView;
 
 - (void)shiftBy:(CGFloat)distance;
-- (void)addWorldLayer:(UIImage *)worldLayerImage;
+- (void)setRotatingImage:(UIImage *)image withRotationalCenter:(CGPoint)center;
 - (void)addProps:(NSArray *)props;
-
-- (CGPoint)worldCenter;
-- (CGPoint)worldSurface;
 
 @end

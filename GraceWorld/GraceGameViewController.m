@@ -69,13 +69,15 @@
     _worldLayers = [[NSMutableArray alloc] init];
     
     CGSize worldSize = [_worldDataStore worldSize];
+    CGRect worldBounds = CGRectMake(roundf((kLandscapeSize.width - worldSize.width)/2) + kWorldOffsetFromCenter.horizontal, kWorldOffsetFromCenter.vertical, worldSize.width, worldSize.height);
+    CGPoint worldCenter = [_worldDataStore worldRotationalCenter];
     
-    RotatingBackgroundView *worldView = [[RotatingBackgroundView alloc] initWithFrame:CGRectMake(roundf((kLandscapeSize.width - worldSize.width)/2) + kWorldOffsetFromCenter.horizontal, kWorldOffsetFromCenter.vertical, worldSize.width, worldSize.height)];
-    [worldView addWorldLayer:[UIImage imageNamed:@"worldBack.png"]];
+    RotatingBackgroundView *worldView = [[RotatingBackgroundView alloc] initWithFrame:worldBounds];
+    [worldView setRotatingImage:[UIImage imageNamed:@"worldBack.png"] withRotationalCenter:worldCenter];
     [_displayView addSubview:worldView];
     
-    RotatingBackgroundView *frontWorldView = [[RotatingBackgroundView alloc] initWithFrame:CGRectMake(roundf((kLandscapeSize.width - worldSize.width)/2) + kWorldOffsetFromCenter.horizontal, kWorldOffsetFromCenter.vertical, worldSize.width, worldSize.height)];
-    [frontWorldView addWorldLayer:[UIImage imageNamed:@"worldFront.png"]];
+    RotatingBackgroundView *frontWorldView = [[RotatingBackgroundView alloc] initWithFrame:worldBounds];
+    [frontWorldView setRotatingImage:[UIImage imageNamed:@"worldFront.png"] withRotationalCenter:worldCenter];
     [_displayView addSubview:frontWorldView];
     
     [_worldLayers addObject:worldView];
@@ -271,7 +273,7 @@
     RotatingBackgroundView *backWorldView = [_worldLayers objectAtIndex:0];
     
     CGPoint convertedPosition = [_worldDataStore worldRotationalCenter];
-    convertedPosition = [_displayView convertPoint:convertedPosition fromView:backWorldView];
+    convertedPosition = [_displayView convertPoint:convertedPosition fromView:backWorldView.rotatingImageView];
     convertedPosition.x += point.x;
     convertedPosition.y -= point.y;
     return convertedPosition;

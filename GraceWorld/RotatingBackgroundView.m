@@ -14,65 +14,45 @@
 #define kDistanceToCenterFromSurface 1161
 
 @implementation RotatingBackgroundView {
-    NSMutableArray *_layers;
-    CGFloat _radianRotation;
-}
-
-
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        _layers = [[NSMutableArray alloc] init];
-        self.userInteractionEnabled = NO;
-        
-        self.layer.anchorPoint = CGPointMake(0.504, 0.435);
-    }
-    return self;
+    CGPoint _rotationalCenter;
 }
 
 
 - (void)shiftBy:(CGFloat)distance {
-    self.transform = CGAffineTransformRotate(self.transform, distance);
+    _rotatingImageView.transform = CGAffineTransformRotate(_rotatingImageView.transform, distance);
 }
 
 
 - (CGFloat)angle {
-    return atan2(self.transform.b, self.transform.a) + M_PI/2;
+    return atan2(_rotatingImageView.transform.b, _rotatingImageView.transform.a) + M_PI/2;
 }
 
 
-- (void)addWorldLayer:(UIImage *)worldLayerImage {
-    UIImageView *layer = [[UIImageView alloc] initWithImage:worldLayerImage];
-    layer.frame = self.bounds;
+- (void)setRotatingImage:(UIImage *)image withRotationalCenter:(CGPoint)center {
+    _rotationalCenter = center;
+    
+    CGRect bounds = self.bounds;
+    
+    UIImageView *layer = [[UIImageView alloc] initWithImage:image];
+    layer.frame = bounds;
     [self addSubview:layer];
-    [_layers addObject:layer];
+    
+    _rotatingImageView = layer;
+    _rotatingImageView.layer.anchorPoint = CGPointMake(center.x / bounds.size.width, center.y / bounds.size.height);
 }
 
 
 - (void)addProps:(NSArray *)props {
-    
     for (RadialElement *prop in props) {
         UIView *display = prop.display;
         
-        CGFloat anchorPointY = ([self bounds].size.height*self.layer.anchorPoint.y - kSurfaceHeight - prop.distanceFromWorldSurface)/display.frame.size.height;
+        CGFloat anchorPointY = (_rotationalCenter.y - kSurfaceHeight - prop.distanceFromWorldSurface)/display.frame.size.height;
         display.layer.anchorPoint = CGPointMake(0.5, anchorPointY);
-        display.center = CGPointMake([self bounds].size.width*self.layer.anchorPoint.x, [self bounds].size.height*self.layer.anchorPoint.y);
+        display.center = _rotationalCenter;
         display.transform = CGAffineTransformMakeRotation(-(prop.angle - M_PI/2));
-        [self addSubview:display];
+        [_rotatingImageView addSubview:display];
     }
     
-}
-
-
-- (CGPoint)worldCenter {
-    return CGPointMake([self bounds].size.width*self.layer.anchorPoint.x, [self bounds].size.height*self.layer.anchorPoint.y);
-}
-
-
-- (CGPoint)worldSurface {
-    CGPoint center = [self worldCenter];
-    center.y -= kDistanceToCenterFromSurface;
-    return center;
 }
 
 
