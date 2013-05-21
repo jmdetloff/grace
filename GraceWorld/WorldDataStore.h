@@ -10,19 +10,19 @@
 
 extern NSString *const kShowCityInterior;
 
+@class OrbitalStructure;
+@class OrbitalCoordinate;
+
 @interface RadialElement : NSObject
 @property (nonatomic, strong) UIView *display;
-@property (nonatomic, assign) CGFloat distanceFromWorldSurface;
-@property (nonatomic, assign) CGFloat angle;
+@property (nonatomic, strong) OrbitalCoordinate *coordinate;
 @end
-
-@class OrbitalStructure;
 
 @interface WorldDataStore : NSObject
 
 @property (nonatomic, assign) BOOL onLadder;
 
-+ (NSArray *)gamePropRadialObjects;
+- (NSArray *)gamePropRadialObjects;
 - (void)loadLevelData;
 - (CGSize)worldSize;
 - (CGPoint)worldRotationalCenter;

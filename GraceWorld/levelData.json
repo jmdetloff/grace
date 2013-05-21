@@ -3,7 +3,8 @@
         "height":3278,
         "width":4655,
         "xCenter":2346,
-        "yCenter":1426
+        "yCenter":1426,
+        "distanceFromCenterToSurface":1161
     }
     "structures":[
         {

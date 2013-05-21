@@ -83,7 +83,7 @@
     [_worldLayers addObject:worldView];
     [_worldLayers addObject:frontWorldView];
     
-    NSArray *props = [WorldDataStore gamePropRadialObjects];
+    NSArray *props = [_worldDataStore gamePropRadialObjects];
     [frontWorldView addProps:props];
     
     _physicsController = [[WorldPhysicsController alloc] init];

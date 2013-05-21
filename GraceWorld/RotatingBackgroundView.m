@@ -8,10 +8,8 @@
 
 #import "RotatingBackgroundView.h"
 #import "WorldDataStore.h"
+#import "OrbitalCoordinate.h"
 #import <QuartzCore/QuartzCore.h>
-
-#define kSurfaceHeight 265
-#define kDistanceToCenterFromSurface 1161
 
 @implementation RotatingBackgroundView {
     CGPoint _rotationalCenter;
@@ -46,10 +44,10 @@
     for (RadialElement *prop in props) {
         UIView *display = prop.display;
         
-        CGFloat anchorPointY = (_rotationalCenter.y - kSurfaceHeight - prop.distanceFromWorldSurface)/display.frame.size.height;
+        CGFloat anchorPointY = (prop.coordinate.height)/display.frame.size.height;
         display.layer.anchorPoint = CGPointMake(0.5, anchorPointY);
         display.center = _rotationalCenter;
-        display.transform = CGAffineTransformMakeRotation(-(prop.angle - M_PI/2));
+        display.transform = CGAffineTransformMakeRotation(-(prop.coordinate.angle - M_PI/2));
         [_rotatingImageView addSubview:display];
     }
     

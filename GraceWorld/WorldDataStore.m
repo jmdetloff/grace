@@ -33,6 +33,10 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
     int _onCityLadder;
 }
 
+// Temporary convenience function
+OrbitalCoordinate *orbitalCoordinate(CGFloat height, CGFloat angle) {
+    return [[OrbitalCoordinate alloc] initWithHeight:height angle:angle];
+}
 
 - (void)loadLevelData {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"levelData" ofType:@".json"];
@@ -60,55 +64,55 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
 }
 
 
-+ (NSArray *)gamePropRadialObjects {
+- (CGFloat)distanceFromCenterToSurface {
+    NSDictionary *dimensions = _graceMetaData[@"worldDimensions"];
+    return [dimensions[@"distanceFromCenterToSurface"] floatValue];
+}
+
+
+- (NSArray *)gamePropRadialObjects {
     NSMutableArray *props = [[NSMutableArray alloc] init];
+    
+    CGFloat distanceFromCenterToSurface = [self distanceFromCenterToSurface];
     
     RadialElement *artist = [[RadialElement alloc] init];
     artist.display = [NPCCreator spriteForNPC:Artist];
-    artist.distanceFromWorldSurface = -artist.display.frame.size.height;
-    artist.angle = 2.807;
+    artist.coordinate = orbitalCoordinate(distanceFromCenterToSurface + artist.display.frame.size.height, 2.807);
     [props addObject:artist];
     
     RadialElement *businessMan = [[RadialElement alloc] init];
     businessMan.display = [NPCCreator spriteForNPC:BusinessMan];
-    businessMan.distanceFromWorldSurface = -businessMan.display.frame.size.height;
-    businessMan.angle = 2.448;
+    businessMan.coordinate = orbitalCoordinate(distanceFromCenterToSurface + businessMan.display.frame.size.height, 2.448);
     [props addObject:businessMan];
     
     RadialElement *bigGuy = [[RadialElement alloc] init];
     bigGuy.display = [NPCCreator spriteForNPC:BigGuy];
-    bigGuy.distanceFromWorldSurface = -bigGuy.display.frame.size.height;
-    bigGuy.angle = 2.582;
+    bigGuy.coordinate = orbitalCoordinate(distanceFromCenterToSurface + bigGuy.display.frame.size.height, 2.582);
     [props addObject:bigGuy];
     
     RadialElement *lady = [[RadialElement alloc] init];
     lady.display = [NPCCreator spriteForNPC:Lady];
-    lady.distanceFromWorldSurface = -lady.display.frame.size.height;
-    lady.angle = 2.891;
+    lady.coordinate = orbitalCoordinate(distanceFromCenterToSurface + lady.display.frame.size.height, 2.891);
     [props addObject:lady];
     
     RadialElement *homeless = [[RadialElement alloc] init];
     homeless.display = [NPCCreator spriteForNPC:HomelessGuy];
-    homeless.distanceFromWorldSurface = - (homeless.display.frame.size.height - 15);
-    homeless.angle = 3.016;
+    homeless.coordinate = orbitalCoordinate(distanceFromCenterToSurface + (homeless.display.frame.size.height - 15), 3.016);
     [props addObject:homeless];
     
     RadialElement *granny = [[RadialElement alloc] init];
     granny.display = [NPCCreator spriteForNPC:Granny];
-    granny.distanceFromWorldSurface = -(granny.display.frame.size.height-32);
-    granny.angle = 3.125;
+    granny.coordinate = orbitalCoordinate(distanceFromCenterToSurface + (granny.display.frame.size.height-32), 3.125);
     [props addObject:granny];
     
     RadialElement *sweeper = [[RadialElement alloc] init];
     sweeper.display = [NPCCreator spriteForNPC:Sweeper];
-    sweeper.distanceFromWorldSurface = -(sweeper.display.frame.size.height - 5);
-    sweeper.angle = 3.302;
+    sweeper.coordinate = orbitalCoordinate(distanceFromCenterToSurface + (sweeper.display.frame.size.height - 5), 3.302);
     [props addObject:sweeper];
     
     RadialElement *guitarGuy = [[RadialElement alloc] init];
     guitarGuy.display = [NPCCreator spriteForNPC:GuitarGuy];
-    guitarGuy.distanceFromWorldSurface = -guitarGuy.display.frame.size.height;
-    guitarGuy.angle = 3.589;
+    guitarGuy.coordinate = orbitalCoordinate(distanceFromCenterToSurface + guitarGuy.display.frame.size.height, 3.589);
     [props addObject:guitarGuy];
     
     return props;
@@ -133,10 +137,11 @@ NSString *const kShowCityInterior = @"kShowCityInterior";
         cityInterior = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
 
+        CGFloat distanceFromCenterToSurface = [self distanceFromCenterToSurface];
+        
         _cityInteriorProp = [[RadialElement alloc] init];
         _cityInteriorProp.display = [[UIImageView alloc] initWithImage:cityInterior];
-        _cityInteriorProp.distanceFromWorldSurface = -_cityInteriorProp.display.frame.size.height + 373;
-        _cityInteriorProp.angle = 3.07;
+        _cityInteriorProp.coordinate = orbitalCoordinate(distanceFromCenterToSurface + _cityInteriorProp.display.frame.size.height - 373, 3.07);
     }
     return _cityInteriorProp;
 }
