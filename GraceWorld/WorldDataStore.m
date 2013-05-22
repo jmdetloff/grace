@@ -56,10 +56,11 @@ OrbitalCoordinate *orbitalCoordinate(CGFloat height, CGFloat angle) {
 }
 
 
-- (CGPoint)worldRotationalCenter {
+- (CGPoint)worldAnchorPoint {
     NSDictionary *dimensions = _graceMetaData[@"worldDimensions"];
-    CGFloat xCenter = [dimensions[@"xCenter"] floatValue];
-    CGFloat yCenter = [dimensions[@"yCenter"] floatValue];
+    NSDictionary *anchorPoint = dimensions[@"worldAnchorPoint"];
+    CGFloat xCenter = [anchorPoint[@"x"] floatValue];
+    CGFloat yCenter = [anchorPoint[@"y"] floatValue];
     return CGPointMake(xCenter, yCenter);
 }
 
@@ -67,6 +68,15 @@ OrbitalCoordinate *orbitalCoordinate(CGFloat height, CGFloat angle) {
 - (CGFloat)distanceFromCenterToSurface {
     NSDictionary *dimensions = _graceMetaData[@"worldDimensions"];
     return [dimensions[@"distanceFromCenterToSurface"] floatValue];
+}
+
+
+- (CGPoint)worldPosition {
+    NSDictionary *dimensions = _graceMetaData[@"worldDimensions"];
+    NSDictionary *anchorPoint = dimensions[@"worldPosition"];
+    CGFloat xCenter = [anchorPoint[@"x"] floatValue];
+    CGFloat yCenter = [anchorPoint[@"y"] floatValue];
+    return CGPointMake(xCenter, yCenter);
 }
 
 

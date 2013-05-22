@@ -26,17 +26,16 @@
 }
 
 
-- (void)setRotatingImage:(UIImage *)image withRotationalCenter:(CGPoint)center {
-    _rotationalCenter = center;
-    
-    CGRect bounds = self.bounds;
+- (void)setRotatingImage:(UIImage *)image size:(CGSize)imageSize anchorPoint:(CGPoint)anchorPoint position:(CGPoint)position {
+    _rotationalCenter = anchorPoint;
     
     UIImageView *layer = [[UIImageView alloc] initWithImage:image];
-    layer.frame = bounds;
+    layer.bounds = CGRectMake(0, 0, imageSize.width, imageSize.height);
+    layer.center = position;
     [self addSubview:layer];
     
     _rotatingImageView = layer;
-    _rotatingImageView.layer.anchorPoint = CGPointMake(center.x / bounds.size.width, center.y / bounds.size.height);
+    _rotatingImageView.layer.anchorPoint = CGPointMake(anchorPoint.x / imageSize.width, anchorPoint.y / imageSize.height);
 }
 
 

@@ -23,7 +23,6 @@
 #define kReportingCoordinates NO
 
 #define kLandscapeSize CGSizeMake(1024, 768)
-#define kWorldOffsetFromCenter UIOffsetMake(0,50)
 
 #define kOrbitDistanceInPixels 1161.f
 #define kOrbitToPixelsRatio (100/kOrbitDistanceInPixels)
@@ -53,12 +52,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    CGRect bounds = self.view.bounds;
+    
     _worldDataStore = [[WorldDataStore alloc] init];
     [_worldDataStore loadLevelData];
     
     _displayView = [[UIView alloc] init];
     _displayView.frame = [self.view bounds];
     _displayView.layer.masksToBounds = NO;
+    _displayView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:_displayView];
 
     _runJumpCrawlEventView = [[RunJumpCrawlEventView alloc] initWithFrame:self.view.bounds touchWidth:200];
@@ -69,15 +71,15 @@
     _worldLayers = [[NSMutableArray alloc] init];
     
     CGSize worldSize = [_worldDataStore worldSize];
-    CGRect worldBounds = CGRectMake(roundf((kLandscapeSize.width - worldSize.width)/2) + kWorldOffsetFromCenter.horizontal, kWorldOffsetFromCenter.vertical, worldSize.width, worldSize.height);
-    CGPoint worldCenter = [_worldDataStore worldRotationalCenter];
+    CGPoint worldAnchorPoint = [_worldDataStore worldAnchorPoint];
+    CGPoint worldPosition = [_worldDataStore worldPosition];
     
-    RotatingBackgroundView *worldView = [[RotatingBackgroundView alloc] initWithFrame:worldBounds];
-    [worldView setRotatingImage:[UIImage imageNamed:@"worldBack.png"] withRotationalCenter:worldCenter];
+    RotatingBackgroundView *worldView = [[RotatingBackgroundView alloc] initWithFrame:bounds];
+    [worldView setRotatingImage:[UIImage imageNamed:@"worldBack.png"] size:worldSize anchorPoint:worldAnchorPoint position:worldPosition];
     [_displayView addSubview:worldView];
     
-    RotatingBackgroundView *frontWorldView = [[RotatingBackgroundView alloc] initWithFrame:worldBounds];
-    [frontWorldView setRotatingImage:[UIImage imageNamed:@"worldFront.png"] withRotationalCenter:worldCenter];
+    RotatingBackgroundView *frontWorldView = [[RotatingBackgroundView alloc] initWithFrame:bounds];
+    [frontWorldView setRotatingImage:[UIImage imageNamed:@"worldFront.png"] size:worldSize anchorPoint:worldAnchorPoint position:worldPosition];
     [_displayView addSubview:frontWorldView];
     
     [_worldLayers addObject:worldView];
@@ -270,10 +272,7 @@
     point.x /= kOrbitToPixelsRatio;
     point.y /= kOrbitToPixelsRatio;
     
-    RotatingBackgroundView *backWorldView = [_worldLayers objectAtIndex:0];
-    
-    CGPoint convertedPosition = [_worldDataStore worldRotationalCenter];
-    convertedPosition = [_displayView convertPoint:convertedPosition fromView:backWorldView.rotatingImageView];
+    CGPoint convertedPosition = [_worldDataStore worldPosition];
     convertedPosition.x += point.x;
     convertedPosition.y -= point.y;
     return convertedPosition;
@@ -313,11 +312,10 @@
 
 
 - (NSDictionary *)attributesToReportForCoordinate:(CGPoint)coordinate {
-    RotatingBackgroundView *layer = [_worldLayers objectAtIndex:0];
-    CGPoint center = [_worldDataStore worldRotationalCenter];
-    center = [self.view convertPoint:center fromView:layer];
-    
+    CGPoint center = [_worldDataStore worldPosition];
     CGFloat convertedX = center.x - (1024/2 - coordinate.x);
+    
+    RotatingBackgroundView *layer = [_worldLayers objectAtIndex:0];
     CGFloat angle = [layer angle];
     CGFloat touchAngle = - atan2(coordinate.y - center.y, center.x - convertedX) - M_PI/2;
     

@@ -14,7 +14,7 @@
 @property (nonatomic, strong, readonly) UIView *rotatingImageView;
 
 - (void)shiftBy:(CGFloat)distance;
-- (void)setRotatingImage:(UIImage *)image withRotationalCenter:(CGPoint)center;
+- (void)setRotatingImage:(UIImage *)image size:(CGSize)imageSize anchorPoint:(CGPoint)anchorPoint position:(CGPoint)position;
 - (void)addProps:(NSArray *)props;
 
 @end
