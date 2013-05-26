@@ -20,6 +20,6 @@
 
 - (void)addOrbitalSurfaces:(NSArray *)orbitalSurfaces;
 - (void)addSensorSurface:(OrbitalSurface *)surface;
-- (void)addOrbitalRect:(OrbitalRect *)rect withContactBlock:(void (^)(BOOL contact))contactBlock;
+- (void)addOrbitalRect:(OrbitalRect *)rect;
 
 @end

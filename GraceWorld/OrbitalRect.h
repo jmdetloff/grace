@@ -9,16 +9,10 @@
 #import "OrbitalElement.h"
 #import <Foundation/Foundation.h>
 
-@class OrbitalRect;
-@protocol OrbitalRectSensorDelegate <NSObject>
-- (void)orbitalRectContactedByBoy:(OrbitalRect *)rect;
-- (void)orbitalRectEndedContactWithBoy:(OrbitalRect *)rect;
-@end
+@interface OrbitalRect : OrbitalElement
 
-
-@interface OrbitalRect : OrbitalElement <NSCopying>
 @property (nonatomic, strong, readonly) NSArray *vertices;
-@property (nonatomic, weak) id<OrbitalRectSensorDelegate> delegate;
+@property (nonatomic, strong) void (^sensorAction)(BOOL contact);
 
 - (id)initWithVertices:(NSArray *)vertices;
 - (void)boyBeganContact;

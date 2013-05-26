@@ -1220,6 +1220,8 @@
 			children = (
 				0FA0C8BF1751BE3500CDC8B8 /* OrbitalElement.h */,
 				0FA0C8C01751BE3500CDC8B8 /* OrbitalElement.m */,
+				0FCD44401733815800F7BED4 /* PlayerPhysicsWrapper.h */,
+				0FCD44411733815800F7BED4 /* PlayerPhysicsWrapper.m */,
 				0F7C4B68172C475E00037EAC /* OrbitalSurface.h */,
 				0F7C4B69172C475E00037EAC /* OrbitalSurface.m */,
 				0F4CE359172FC57E00637555 /* OrbitalRect.h */,
@@ -1242,8 +1244,6 @@
 				0F7C4B6D172C62B000037EAC /* OneWayEdgeCollisionDetector.cpp */,
 				0F4CE35C1730D1BA00637555 /* OrbitController.h */,
 				0F4CE35D1730D1BA00637555 /* OrbitController.m */,
-				0FCD44401733815800F7BED4 /* PlayerPhysicsWrapper.h */,
-				0FCD44411733815800F7BED4 /* PlayerPhysicsWrapper.m */,
 			);
 			name = Physics;
 			sourceTree = "<group>";

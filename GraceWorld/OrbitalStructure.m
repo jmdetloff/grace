@@ -11,24 +11,17 @@
 #import "OrbitalRect.h"
 
 
-@interface OrbitalStructure () <OrbitalRectSensorDelegate>
-@end
-
-
 @implementation OrbitalStructure {
-    NSMutableDictionary *_rectContactBlocks;
     NSMutableArray *_orbitalSurfaces;
     NSMutableArray *_sensorSurfaces;
     NSMutableArray *_orbitalRects;
 }
 
-@synthesize orbitalSurfaces = _orbitalSurfaces;
 
 - (id)init {
     self = [super init];
     if (self) {
         _activated = YES;
-        _rectContactBlocks = [[NSMutableDictionary alloc] init];
         _orbitalSurfaces = [[NSMutableArray alloc] init];
         _orbitalRects = [[NSMutableArray alloc] init];
         _sensorSurfaces = [[NSMutableArray alloc] init];
@@ -63,33 +56,8 @@
 }
 
 
-- (void)addOrbitalRect:(OrbitalRect *)rect withContactBlock:(void (^)(BOOL contact))contactBlock {
-    rect.delegate = self;
+- (void)addOrbitalRect:(OrbitalRect *)rect {
     [_orbitalRects addObject:rect];
-    
-    void (^blockCopy)(BOOL) = [contactBlock copy];
-    if (blockCopy) {
-        [_rectContactBlocks setObject:blockCopy forKey:rect];
-    }
-}
-
-
-#pragma mark -
-
-
-- (void)orbitalRectContactedByBoy:(OrbitalRect *)rect {
-    void (^contactBlock)(BOOL) = [_rectContactBlocks objectForKey:rect];
-    if (contactBlock) {
-        contactBlock(YES);
-    }
-}
-
-
-- (void)orbitalRectEndedContactWithBoy:(OrbitalRect *)rect {
-    void (^contactBlock)(BOOL) = [_rectContactBlocks objectForKey:rect];
-    if (contactBlock) {
-        contactBlock(NO);
-    }
 }
 
 

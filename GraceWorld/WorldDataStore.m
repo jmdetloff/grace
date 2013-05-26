@@ -385,6 +385,15 @@ OrbitalCoordinate *orbitalCoordinate(CGFloat height, CGFloat angle) {
         OrbitalRect *ladder7 = [[OrbitalRect alloc] initWithVertices:ladder7Vertices];
         OrbitalRect *ladder8 = [[OrbitalRect alloc] initWithVertices:ladder8Vertices];
         
+        ladder1.sensorAction = ladderBlock;
+        ladder2.sensorAction = ladderBlock;
+        ladder3.sensorAction = ladderBlock;
+        ladder4.sensorAction = ladderBlock;
+        ladder5.sensorAction = ladderBlock;
+        ladder6.sensorAction = ladderBlock;
+        ladder7.sensorAction = ladderBlock;
+        ladder8.sensorAction = ladderBlock;
+        
         _cityInterior = [[OrbitalStructure alloc] init];
         [_cityInterior addSensorSurface:entranceSensor];
         [_cityInterior addOrbitalSurfaces:surfaces];
@@ -398,14 +407,14 @@ OrbitalCoordinate *orbitalCoordinate(CGFloat height, CGFloat angle) {
         [_cityInterior addOrbitalSurfaces:platform7];
         [_cityInterior addOrbitalSurfaces:platform8];
         [_cityInterior addOrbitalSurfaces:platform9];
-        [_cityInterior addOrbitalRect:ladder1 withContactBlock:ladderBlock];
-        [_cityInterior addOrbitalRect:ladder2 withContactBlock:ladderBlock];
-        [_cityInterior addOrbitalRect:ladder3 withContactBlock:ladderBlock];
-        [_cityInterior addOrbitalRect:ladder4 withContactBlock:ladderBlock];
-        [_cityInterior addOrbitalRect:ladder5 withContactBlock:ladderBlock];
-        [_cityInterior addOrbitalRect:ladder6 withContactBlock:ladderBlock];
-        [_cityInterior addOrbitalRect:ladder7 withContactBlock:ladderBlock];
-        [_cityInterior addOrbitalRect:ladder8 withContactBlock:ladderBlock];
+        [_cityInterior addOrbitalRect:ladder1];
+        [_cityInterior addOrbitalRect:ladder2];
+        [_cityInterior addOrbitalRect:ladder3];
+        [_cityInterior addOrbitalRect:ladder4];
+        [_cityInterior addOrbitalRect:ladder5];
+        [_cityInterior addOrbitalRect:ladder6];
+        [_cityInterior addOrbitalRect:ladder7];
+        [_cityInterior addOrbitalRect:ladder8];
     }
     return _cityInterior;
 }
