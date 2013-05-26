@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Uebie. All rights reserved.
 //
 
+#import "OrbitalElement.h"
 #import <Foundation/Foundation.h>
 
 @class OrbitalRect;
@@ -15,7 +16,7 @@
 @end
 
 
-@interface OrbitalRect : NSObject <NSCopying>
+@interface OrbitalRect : OrbitalElement <NSCopying>
 @property (nonatomic, strong, readonly) NSArray *vertices;
 @property (nonatomic, weak) id<OrbitalRectSensorDelegate> delegate;
 

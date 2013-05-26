@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Uebie. All rights reserved.
 //
 
+#import "OrbitalElement.h"
 #import <Foundation/Foundation.h>
 #import "Box2D/Box2D.h"
 
@@ -17,7 +18,7 @@ typedef enum {
 
 @class OrbitalCoordinate;
 
-@interface OrbitalSurface : NSObject
+@interface OrbitalSurface : OrbitalElement
 
 @property (nonatomic, assign) BOOL activated;
 @property (nonatomic, assign) BOOL isSensor;
@@ -31,7 +32,6 @@ typedef enum {
 @property (nonatomic, assign) CGFloat horizontalVelocity;
 @property (nonatomic, strong) OrbitalCoordinate *coordA;
 @property (nonatomic, strong) OrbitalCoordinate *coordB;
-@property (nonatomic, assign) b2Body *physicsBody;
 
 - (id)initWithCoordA:(OrbitalCoordinate *)coordA coordB:(OrbitalCoordinate *)coordB;
 - (void)boyMadeContactOnSide:(SurfaceRelativeDirection)relativeDirection;

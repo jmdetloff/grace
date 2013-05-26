@@ -35,20 +35,6 @@
 }
 
 
-- (void)updatePhysics {
-    if (_physicsBody) {
-        // set any necessary physics attributes
-    }
-}
-
-
-- (void)setPhysicsBody:(b2Body *)physicsBody {
-    _physicsBody = physicsBody;
-    
-    [self updatePhysics];
-}
-
-
 #pragma mark -
 
 
