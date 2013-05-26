@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Uebie. All rights reserved.
 //
 
+#import "OrbitalElement.h"
 #import "PlayerPhysicsWrapper.h"
 #import "GraceGameViewController.h"
 #import "RotatingBackgroundView.h"
@@ -102,7 +103,7 @@
     _boy = [[BoyView alloc] initWithFrame:CGRectMake(-boySize.width/2, -boySize.height/2, boySize.width, boySize.height)];
     [_boyContainer addSubview:_boy];
     
-    [_boyContainer setPhysicsFixture:_playerPhysics.playerBody->GetFixtureList()];
+    [_boyContainer setPhysicsFixture:_playerPhysics.physicsBody->GetFixtureList()];
 
     [_physicsBackedViews addObject:_boyContainer];
     
@@ -296,7 +297,7 @@
             [self jump];
         } else {
             _boy.climbing = YES;
-            _playerPhysics.playerBody->SetGravityScale(0);
+            _playerPhysics.physicsBody->SetGravityScale(0);
         }
     }
 }

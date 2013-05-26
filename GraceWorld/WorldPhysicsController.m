@@ -112,7 +112,8 @@
     
     b2Body *body = [self addBodyWithDef:boyDef];
     
-    _player = [[PlayerPhysicsWrapper alloc] initWithb2Body:body];
+    _player = [[PlayerPhysicsWrapper alloc] init];
+    _player.physicsBody = body;
     _player.collidingFixture = [self addFixture:boyFixtureDef toBody:body];
     _player.sensorFixture = [self addFixture:sensorFixtureDef toBody:body];
     

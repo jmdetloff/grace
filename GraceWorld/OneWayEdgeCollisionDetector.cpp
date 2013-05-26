@@ -88,9 +88,9 @@ b2Body* OneWayEdgeCollisionDetector::GetBodyFromContact(b2Contact *contact, bool
     b2Body* bodyA = fixtureA->GetBody();
     b2Body* bodyB = fixtureB->GetBody();
     
-    if (bodyA == player.playerBody) {
+    if (bodyA == player.physicsBody) {
         return (boy ? bodyA : bodyB);
-    } else if (bodyB == player.playerBody) {
+    } else if (bodyB == player.physicsBody) {
         return (boy ? bodyB : bodyA);
     } else {
         return nil;
@@ -103,8 +103,8 @@ void OneWayEdgeCollisionDetector::PostSolve(b2Contact* contact, const b2ContactI
 
 
 bool OneWayEdgeCollisionDetector::ContactIsFromBelow(b2Contact *contact) {
-    b2Vec2 boyPosition = player.playerBody->GetPosition();
-    b2PolygonShape *boyShape = (b2PolygonShape *)player.playerBody->GetFixtureList()->GetShape();
+    b2Vec2 boyPosition = player.physicsBody->GetPosition();
+    b2PolygonShape *boyShape = (b2PolygonShape *)player.physicsBody->GetFixtureList()->GetShape();
     
     b2Vec2 lowestVertex = boyShape->GetVertex(0);
     NSInteger vertexCount = boyShape->GetVertexCount();

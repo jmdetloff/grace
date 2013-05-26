@@ -18,7 +18,6 @@
 - (id)initWithb2Body:(b2Body *)body {
     self = [super init];
     if (self) {
-        _playerBody = body;
         _bottomContacts = [[NSMutableArray alloc] init];
     }
     return self;
@@ -63,7 +62,7 @@
 
 - (RotationBlockState)rotationIsBlockedOrbitSpeed:(CGFloat)orbitSpeed {
     
-    for (b2ContactEdge *contactEdge = _playerBody->GetContactList() ; contactEdge ; contactEdge = contactEdge->next) {
+    for (b2ContactEdge *contactEdge = self.physicsBody->GetContactList() ; contactEdge ; contactEdge = contactEdge->next) {
         b2Contact *contact = contactEdge->contact;
         
         b2Fixture *fixtureA = contact->GetFixtureA();
@@ -81,7 +80,7 @@
         
         if (state == ContactLeft || state == ContactRight) {
             BOOL pushing = NO;
-            for (b2ContactEdge *contactEdge = _playerBody->GetContactList() ; contactEdge ; contactEdge = contactEdge->next) {
+            for (b2ContactEdge *contactEdge = self.physicsBody->GetContactList() ; contactEdge ; contactEdge = contactEdge->next) {
                 b2Contact *contact = contactEdge->contact;
                 ContactState state = [self stateFromContact:contact];
                 BOOL collidingContact = NO;
@@ -150,7 +149,7 @@
     b2Fixture* fixtureB = contact->GetFixtureB();
     b2Body* bodyA = fixtureA->GetBody();
     b2Body* bodyB = fixtureB->GetBody();
-    if (_playerBody == bodyA) {
+    if (self.physicsBody == bodyA) {
         return bodyB;
     } else {
         return bodyA;

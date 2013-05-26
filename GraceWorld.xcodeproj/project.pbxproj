@@ -237,6 +237,7 @@
 		0F7C4B6B172C475E00037EAC /* OrbitalSurface.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C4B69172C475E00037EAC /* OrbitalSurface.m */; };
 		0F7C4B6F172C62B000037EAC /* OneWayEdgeCollisionDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C4B6D172C62B000037EAC /* OneWayEdgeCollisionDetector.cpp */; };
 		0F7C4B70172C62B000037EAC /* OneWayEdgeCollisionDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C4B6D172C62B000037EAC /* OneWayEdgeCollisionDetector.cpp */; };
+		0FA0C8C11751BE3500CDC8B8 /* OrbitalElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA0C8C01751BE3500CDC8B8 /* OrbitalElement.m */; };
 		0FBAB2171735C548007785BF /* CoordinateReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBAB2161735C548007785BF /* CoordinateReporter.m */; };
 		0FBAB21A1735D404007785BF /* levelData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FBAB2191735D404007785BF /* levelData.json */; };
 		0FBAB21B1735D404007785BF /* levelData.json in Resources */ = {isa = PBXBuildFile; fileRef = 0FBAB2191735D404007785BF /* levelData.json */; };
@@ -648,6 +649,8 @@
 		0F7C4B69172C475E00037EAC /* OrbitalSurface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrbitalSurface.m; sourceTree = "<group>"; };
 		0F7C4B6D172C62B000037EAC /* OneWayEdgeCollisionDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OneWayEdgeCollisionDetector.cpp; sourceTree = "<group>"; };
 		0F7C4B6E172C62B000037EAC /* OneWayEdgeCollisionDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneWayEdgeCollisionDetector.h; sourceTree = "<group>"; };
+		0FA0C8BF1751BE3500CDC8B8 /* OrbitalElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrbitalElement.h; sourceTree = "<group>"; };
+		0FA0C8C01751BE3500CDC8B8 /* OrbitalElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrbitalElement.m; sourceTree = "<group>"; };
 		0FBAB2151735C548007785BF /* CoordinateReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoordinateReporter.h; sourceTree = "<group>"; };
 		0FBAB2161735C548007785BF /* CoordinateReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoordinateReporter.m; sourceTree = "<group>"; };
 		0FBAB2191735D404007785BF /* levelData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = levelData.json; sourceTree = "<group>"; };
@@ -1215,6 +1218,8 @@
 		0F7C4B63172C464E00037EAC /* Physics model */ = {
 			isa = PBXGroup;
 			children = (
+				0FA0C8BF1751BE3500CDC8B8 /* OrbitalElement.h */,
+				0FA0C8C01751BE3500CDC8B8 /* OrbitalElement.m */,
 				0F5E728A172C855E00FF8912 /* OrbitalStructure.h */,
 				0F5E728B172C855E00FF8912 /* OrbitalStructure.m */,
 				0F7C4B64172C467C00037EAC /* OrbitalCoordinate.h */,
@@ -1876,6 +1881,7 @@
 				0FBAB2471735D485007785BF /* SBJsonBase.m in Sources */,
 				0FBAB2491735D485007785BF /* SBJsonParser.m in Sources */,
 				0FBAB24B1735D485007785BF /* SBJsonWriter.m in Sources */,
+				0FA0C8C11751BE3500CDC8B8 /* OrbitalElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
