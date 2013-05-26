@@ -7,6 +7,7 @@
 //
 
 #import "Box2d/Box2D.h"
+#import "OrbitalElement.h"
 #import "OrbitalSurface.h"
 #import "OrbitalRect.h"
 #include "OneWayEdgeCollisionDetector.h"
@@ -21,14 +22,16 @@ int locationOfPointRelativeToEdge(b2Vec2 point, b2Body *edgeBody) {
 
 
 void OneWayEdgeCollisionDetector::BeginContact(b2Contact *contact) {
-    if (ContactIsFromBelow(contact)) {
+    b2Body *platformBody = this->GetBodyFromContact(contact, false);
+    OrbitalElement *platform = (__bridge OrbitalElement *)platformBody->GetUserData();
+    
+    BOOL playerShouldCollide = [player shouldCollidePlayer:player withElement:platform contact:contact];
+    if (playerShouldCollide) {
         [player beginContact:contact];
     }
     
-    b2Body *platform = this->GetBodyFromContact(contact, false);
-    NSObject *obj = (__bridge NSObject *)platform->GetUserData();
-    if ([obj isKindOfClass:[OrbitalRect class]]) {
-        [(OrbitalRect *)obj boyBeganContact];
+    if ([platform isKindOfClass:[OrbitalRect class]]) {
+        [(OrbitalRect *)platform boyBeganContact];
     }
 }
 
@@ -57,8 +60,6 @@ void OneWayEdgeCollisionDetector::PreSolve(b2Contact* contact, const b2Manifold*
         return;
     }
     
-    bool solid = ContactIsFromBelow(contact);
-    
     b2Body *platform = this->GetBodyFromContact(contact, false);
     OrbitalSurface *surface = (__bridge OrbitalSurface *)platform->GetUserData();
     if (surface) {
@@ -72,9 +73,9 @@ void OneWayEdgeCollisionDetector::PreSolve(b2Contact* contact, const b2Manifold*
         [surface boyMadeContactOnSide:direction];
     }
     
+    BOOL playerShouldCollide = [player shouldCollidePlayer:player withElement:surface contact:contact];
     
-    b2Vec2 boyVelocity = collidingBoy->GetLinearVelocity();
-    if (boyVelocity.y <= 0.01 && solid && (!surface || surface.allowsCollision)) {
+    if (playerShouldCollide && (!surface || surface.allowsCollision)) {
         return;
     }
 
@@ -99,37 +100,4 @@ b2Body* OneWayEdgeCollisionDetector::GetBodyFromContact(b2Contact *contact, bool
 
 
 void OneWayEdgeCollisionDetector::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
-}
-
-
-bool OneWayEdgeCollisionDetector::ContactIsFromBelow(b2Contact *contact) {
-    b2Vec2 boyPosition = player.physicsBody->GetPosition();
-    b2PolygonShape *boyShape = (b2PolygonShape *)player.physicsBody->GetFixtureList()->GetShape();
-    
-    b2Vec2 lowestVertex = boyShape->GetVertex(0);
-    NSInteger vertexCount = boyShape->GetVertexCount();
-    for (int i = 1; i < vertexCount; i++) {
-        b2Vec2 vertex = boyShape->GetVertex(i);
-        if (vertex.y > lowestVertex.y) {
-            lowestVertex = vertex;
-        }
-    }
-    
-    static const CGFloat footError = 0.2;
-    CGFloat footPosition = boyPosition.y - lowestVertex.y + footError;
-    
-    int numPoints = contact->GetManifold()->pointCount;
-    
-    BOOL solid = NO;
-    
-    b2WorldManifold worldManifold;
-    contact->GetWorldManifold( &worldManifold );
-    for (int i = 0; i < numPoints; i++) {
-        if (worldManifold.points[i].y < footPosition) {
-            solid = YES;
-            break;
-        }
-    }
-
-    return solid;
 }

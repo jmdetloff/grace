@@ -15,12 +15,56 @@
     BOOL _standing;
 }
 
-- (id)initWithb2Body:(b2Body *)body {
+- (id)init {
     self = [super init];
     if (self) {
         _bottomContacts = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+
+- (BOOL)shouldCollidePlayer:(PlayerPhysicsWrapper *)boy withElement:(OrbitalElement *)element contact:(b2Contact *)contact {
+    if (contact->GetFixtureA() == _sensorFixture || contact->GetFixtureB() == _sensorFixture) {
+        return NO;
+    }
+    
+    BOOL solid = [self contactIsFromBelow:contact];
+    b2Vec2 boyVelocity = self.physicsBody->GetLinearVelocity();
+    return (boyVelocity.y <= 0.01 && solid);
+}
+
+
+- (BOOL)contactIsFromBelow:(b2Contact *)contact {
+    b2Vec2 boyPosition = self.physicsBody->GetPosition();
+    b2PolygonShape *boyShape = (b2PolygonShape *)self.physicsBody->GetFixtureList()->GetShape();
+    
+    b2Vec2 lowestVertex = boyShape->GetVertex(0);
+    NSInteger vertexCount = boyShape->GetVertexCount();
+    for (int i = 1; i < vertexCount; i++) {
+        b2Vec2 vertex = boyShape->GetVertex(i);
+        if (vertex.y > lowestVertex.y) {
+            lowestVertex = vertex;
+        }
+    }
+    
+    static const CGFloat footError = 0.2;
+    CGFloat footPosition = boyPosition.y - lowestVertex.y + footError;
+    
+    int numPoints = contact->GetManifold()->pointCount;
+    
+    BOOL solid = NO;
+    
+    b2WorldManifold worldManifold;
+    contact->GetWorldManifold( &worldManifold );
+    for (int i = 0; i < numPoints; i++) {
+        if (worldManifold.points[i].y < footPosition) {
+            solid = YES;
+            break;
+        }
+    }
+    
+    return solid;
 }
 
 

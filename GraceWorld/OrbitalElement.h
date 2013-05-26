@@ -9,9 +9,11 @@
 #import "Box2d/Box2d.h"
 #import <Foundation/Foundation.h>
 
-
+@class PlayerPhysicsWrapper;
 @interface OrbitalElement : NSObject
 
 @property (nonatomic, assign) b2Body *physicsBody;
+
+- (BOOL)shouldCollidePlayer:(PlayerPhysicsWrapper *)boy withElement:(OrbitalElement *)element contact:(b2Contact *)contact;
 
 @end

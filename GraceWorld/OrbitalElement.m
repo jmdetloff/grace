@@ -10,4 +10,8 @@
 
 @implementation OrbitalElement
 
+- (BOOL)shouldCollidePlayer:(PlayerPhysicsWrapper *)boy withElement:(OrbitalElement *)element contact:(b2Contact *)contact {
+    return YES;
+}
+
 @end
