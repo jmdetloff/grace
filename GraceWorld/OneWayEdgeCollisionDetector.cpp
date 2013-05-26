@@ -27,24 +27,22 @@ void OneWayEdgeCollisionDetector::BeginContact(b2Contact *contact) {
     
     BOOL playerShouldCollide = [player shouldCollidePlayer:player withElement:platform contact:contact];
     if (playerShouldCollide) {
-        [player beginContact:contact];
+        [player contactBegan:contact];
     }
     
-    if ([platform isKindOfClass:[OrbitalRect class]]) {
-        [(OrbitalRect *)platform boyBeganContact];
+    if ([platform isKindOfClass:[OrbitalSensor class]]) {
+        [(OrbitalSensor *)platform contactBegan:contact];
     }
 }
 
 
 void OneWayEdgeCollisionDetector::EndContact(b2Contact *contact) {
-    [player endContact:contact];
+    [player contactEnded:contact];
     
     b2Body *platform = this->GetBodyFromContact(contact, false);
     NSObject *obj = (__bridge NSObject *)platform->GetUserData();
-    if ([obj isKindOfClass:[OrbitalSurface class]]) {
-        [(OrbitalSurface *)obj boyEndedContact];
-    } else if ([obj isKindOfClass:[OrbitalRect class]]) {
-        [(OrbitalRect *)obj boyEndedContact];
+    if ([obj isKindOfClass:[OrbitalSensor class]]) {
+        [(OrbitalSensor *)obj contactEnded:contact];
     }
 }
 

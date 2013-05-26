@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Uebie. All rights reserved.
 //
 
-#import "OrbitalElement.h"
+#import "OrbitalSensor.h"
 #import <Foundation/Foundation.h>
 #import "Box2D/Box2D.h"
 
@@ -18,12 +18,11 @@ typedef enum {
 
 @class OrbitalCoordinate;
 
-@interface OrbitalSurface : OrbitalElement
+@interface OrbitalSurface : OrbitalSensor
 
 @property (nonatomic, assign) BOOL activated;
 @property (nonatomic, assign) BOOL isSensor;
 @property (nonatomic, assign, readonly) BOOL allowsCollision;
-@property (nonatomic, strong) void (^sensorAction)();
 
 @property (nonatomic, assign) BOOL moving;
 @property (nonatomic, assign) BOOL fallThroughOnTap;
@@ -35,6 +34,5 @@ typedef enum {
 
 - (id)initWithCoordA:(OrbitalCoordinate *)coordA coordB:(OrbitalCoordinate *)coordB;
 - (void)boyMadeContactOnSide:(SurfaceRelativeDirection)relativeDirection;
-- (void)boyEndedContact;
 
 @end

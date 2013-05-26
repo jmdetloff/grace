@@ -21,17 +21,4 @@
 }
 
 
-#pragma mark -
-
-
-- (void)boyBeganContact {
-    _sensorAction(YES);
-}
-
-
-- (void)boyEndedContact {
-    _sensorAction(NO);
-}
-
-
 @end

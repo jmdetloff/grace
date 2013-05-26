@@ -68,14 +68,14 @@
 }
 
 
-- (void)beginContact:(b2Contact *)contact {
+- (void)contactBegan:(b2Contact *)contact {
     NSValue *val = [NSValue valueWithPointer:contact];
     [_bottomContacts addObject:val];
     _standing = YES;
 }
 
 
-- (void)endContact:(b2Contact *)contact {
+- (void)contactEnded:(b2Contact *)contact {
     NSValue *valToRemove = nil;
     for (NSValue *val in _bottomContacts) {
         b2Contact *existingContact = (b2Contact *)[val pointerValue];

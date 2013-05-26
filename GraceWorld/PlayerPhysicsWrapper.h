@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Uebie. All rights reserved.
 //
 
-#import "OrbitalElement.h"
+#import "OrbitalSensor.h"
 #import <Foundation/Foundation.h>
 #import "Box2D/Box2D.h"
 
@@ -25,14 +25,12 @@ typedef enum {
 } ContactState;
 
 
-@interface PlayerPhysicsWrapper : OrbitalElement
+@interface PlayerPhysicsWrapper : OrbitalSensor
 
 @property (nonatomic, assign) b2Fixture *collidingFixture;
 @property (nonatomic, assign) b2Fixture *sensorFixture;
 
 - (RotationBlockState)rotationIsBlockedOrbitSpeed:(CGFloat)orbitSpeed;
-- (void)beginContact:(b2Contact *)contact;
-- (void)endContact:(b2Contact *)contact;
 - (BOOL)isStanding;
 
 @end

@@ -6,16 +6,13 @@
 //  Copyright (c) 2013 Uebie. All rights reserved.
 //
 
-#import "OrbitalElement.h"
+#import "OrbitalSensor.h"
 #import <Foundation/Foundation.h>
 
-@interface OrbitalRect : OrbitalElement
+@interface OrbitalRect : OrbitalSensor
 
 @property (nonatomic, strong, readonly) NSArray *vertices;
-@property (nonatomic, strong) void (^sensorAction)(BOOL contact);
 
 - (id)initWithVertices:(NSArray *)vertices;
-- (void)boyBeganContact;
-- (void)boyEndedContact;
 
 @end

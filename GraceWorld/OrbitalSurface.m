@@ -38,22 +38,26 @@
 #pragma mark -
 
 
+- (void)contactBegan:(b2Contact *)contact {
+    // NO-op
+}
+
+
+- (void)contactEnded:(b2Contact *)contact {
+    if (!_isSensor) return;
+    
+    _lastContactDirection = SurfaceUntouched;
+}
+
+
 - (void)boyMadeContactOnSide:(SurfaceRelativeDirection)relativeDirection {
     if (!_isSensor) return;
     
     if ((relativeDirection == SurfaceLeft && _lastContactDirection == SurfaceRight) || (relativeDirection == SurfaceRight && _lastContactDirection == SurfaceLeft)) {
-        if (_sensorAction) {
-            _sensorAction();
-        }
+        self.sensorAction(YES);
     }
     
     _lastContactDirection = relativeDirection;
-}
-
-- (void)boyEndedContact {
-    if (!_isSensor) return;
-    
-    _lastContactDirection = SurfaceUntouched;
 }
 
 @end
